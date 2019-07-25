@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #34495E;
+    color: white;
+    padding: 30px;
+}
+
+table {
+    text-align: center;
+}
+
+.Table.InfoProduct h1 {
+    color: #686868;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-outline-success {
+    border-color: #00a326;
+    color: #00a326;
+}
+
+.btn-outline-success:hover {
+    background-color: #00a326;
+    color: #fff;
+    -moz-transition: background-color 0.75s, color 0.75s;
+    -o-transition: background-color 0.75s, color 0.75s;
+    -webkit-transition: background-color 0.75s, color 0.75s;
+    transition: background-color 0.75s, color 0.75s;
+}
+
+.btn-outline-danger:hover {
+    -moz-transition: background-color 0.75s, color 0.75s;
+    -o-transition: background-color 0.75s, color 0.75s;
+    -webkit-transition: background-color 0.75s, color 0.75s;
+    transition: background-color 0.75s, color 0.75s;
+}
+
+Button.Normal.Outline {
+    border-color: #34495E;
+    color: #34495E;
+}
+
+Button.Normal.Outline:hover {
+    background-color: #34495E;
+    color: #E5E8E8;
+    -moz-transition: background-color 0.75s, color 0.75s;
+    -o-transition: background-color 0.75s, color 0.75s;
+    -webkit-transition: background-color 0.75s, color 0.75s;
+    transition: background-color 0.75s, color 0.75s;
+}
+
+.MainContainer, .SearchContainer {
+    padding: 15px;
+    margin: auto;
+}
+
+.SearchContainer {
+    overflow: auto;
+    position: relative;
+    padding: 0px !important;
+    min-height: 150px;
+    background-color: #e6e6e6;
+}
+
+.SearchContainer input[type="text"] {
+    margin: 10px;
+    width: 80%;
+}
+
+.SearchContainer .SubCont {
+    display: inline-block;
+    float: left;
+    margin: 0 !important;
+    min-height: 150px;
+    padding: 5px;
+}
+
+.SearchContainer .Objects {
+    width: 70%;
+    background-color: #ccc;
+}
+
+.SearchContainer .Sell {
+    text-align: center;
+    background-color: #e6e6e6;
+    width: 30%;
+}
+
+.SearchContainer .Sell p {
+    color: #686868;
+}
+
+.MainContainer {
+    background-color: #E5E8E8;
+    min-height: 100px;
+}
+
+.HeaderForm {
+    color: #34495E;
+}
+
+.HeaderForm .Object {
+    display: inline-block;
+    text-align: center;
+}
+
+.HeaderForm .Object.title {
+    width: 75%;
+}
+
+.HeaderForm .Object.option {
+    width: 20%;
+}
+
+
+/*BORRAR*/
+div.Prueba {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+div.Prueba1 {
+    height: 600px;
+    width: 600px;
+    padding: 50px;
+}
+
+.Prueba4 {
+    background-color: #ff0054;
+    color: white;
+}
+
+.Prueba1 {
+    background-color: #fe757d;
+    color: white;
+}
+
+.Prueba3 {
+    background-color: #f8fe9a;
+    color: black;
+}
+
+.Prueba2 {
+    background-color: #498e62;
+    color: white;
+}

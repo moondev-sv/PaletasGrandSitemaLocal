@@ -23,6 +23,37 @@
 	<?php
 		include("barra_herramientas.php")
 	?>
+		<div class="container">
+			Seleccione el filtro de fecha 
+		<select name="" id="">
+			<option value="">6 HORAS</option>
+			<option value="">12 HORAS</option>
+			<option value="">1 DIA</option>
+			<option value="">1 SEMANA</option>
+			<option value="">1 MES</option>
+			</select>
+		</div>
+		<div>
+			<table CLASS="table table-row table-light">
+				<thead>
+					<td>ID</td>
+					<td>PRODUCTO</td>
+					<td>CANTIDAD</td>
+					<td>PRECIO UNITARIO</td>
+					<td>PRECIO TOTAL</td>
+				</thead>
+				<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
+	
 </body>
 </html>

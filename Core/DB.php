@@ -23,7 +23,7 @@ class BaseDatos {
 		 	$this->error=true;
 		 }
 	}
-	/*
+	
 	public function insert($tabla, $campos, $valores) {
 		$campos2 = array();
 		$comodines = array();
@@ -105,7 +105,7 @@ class BaseDatos {
 		} else {
 			return 'false';
 		}
-	}*/
+	}
 
 }
 ?>

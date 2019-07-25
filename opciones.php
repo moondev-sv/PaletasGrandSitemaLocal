@@ -22,7 +22,7 @@
 	<!--Barra de menu opciones-->
 	<div class="">
 	<?php
-		include("barra_herramientas.php")
+		include("barra_herramientas_modificada.php")
 	?>
 	</div>
 

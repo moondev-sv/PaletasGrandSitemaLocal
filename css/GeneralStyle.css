@@ -20,6 +20,10 @@ table {
     text-align: center;
 }
 
+.modal {
+    color: #686868;
+}
+
 .btn-outline-success {
     border-color: #00a326;
     color: #00a326;

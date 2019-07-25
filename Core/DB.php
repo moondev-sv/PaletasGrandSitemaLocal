@@ -1,8 +1,8 @@
 <?php
-define("BD_HOST","sql109.byethost.com");
-define("BD_USER","b24_22880334");
-define("BD_PASS","svProgramingSubProyecto");
-define("BD_NAME","b24_22880334_CruzRojaSAGuardavidas");
+define("BD_HOST","localhost");
+define("BD_USER","root");
+define("BD_PASS","");
+define("BD_NAME","cajaexpress_v2");
 
 /*define("BD_HOST","localhost");
 define("BD_USER","root");
@@ -23,7 +23,7 @@ class BaseDatos {
 		 	$this->error=true;
 		 }
 	}
-
+	/*
 	public function insert($tabla, $campos, $valores) {
 		$campos2 = array();
 		$comodines = array();
@@ -71,6 +71,7 @@ class BaseDatos {
 	    }
   	}
 
+	
 	public function login($usuario,$clave) {
 		$sql = $this->bd->prepare("SELECT * FROM docente WHERE carnet=:carnet AND clave=:clave AND estado='Activo' AND accesosistemas='1' AND esadministrador='1'");
 		$sql->bindParam(':carnet',$usuario,PDO::PARAM_STR);
@@ -104,7 +105,7 @@ class BaseDatos {
 		} else {
 			return 'false';
 		}
-	}
+	}*/
 
 }
 ?>

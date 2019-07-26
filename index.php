@@ -20,7 +20,7 @@
     <script src="<?= js ?>functions.js"></script>
 </head>
 
-<body onload="searchProduct();">
+<body onload="startSale();">
     <div class="MainContainer">
         <div class="HeaderForm">
             <div class="Object title">
@@ -206,12 +206,12 @@
                 <div class="modal-body">
 
                     <center><input id="txtSearchProduct" placeholder="Ingrese la cantidad de productos" type="text"
-                            class="form-control form-control"></center>
+                            class="form-control form-control" onkeypress="validarSiNumero(event);"></center>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="alterarTabla(this.value);">Aceptar</button>
                 </div>
 
             </div>
@@ -232,7 +232,7 @@
                 <div class="modal-body">
 
                     <center><input id="txtSearchProduct" placeholder="Ingrese la cantidad de productos" type="text"
-                            class="form-control form-control"></center>
+                            class="form-control form-control" onkeypress="validarSiNumero(event);"></center>
                 </div>
 
                 <!-- Modal footer -->
@@ -244,7 +244,6 @@
         </div>
     </div>
 </body>
-
 </html>
 
 <?php

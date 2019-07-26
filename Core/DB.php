@@ -1,8 +1,8 @@
 <?php
 define("BD_HOST","localhost");
 define("BD_USER","root");
-define("BD_PASS","");
-define("BD_NAME","cajaexpress_v2");
+define("BD_PASS","mysql");
+define("BD_NAME","cajaexpress_v3");
 /*define("BD_HOST","localhost");
 define("BD_USER","root");
 define("BD_PASS","mysql");

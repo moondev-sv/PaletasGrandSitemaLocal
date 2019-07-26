@@ -10,11 +10,10 @@ if($accion=="Agregar producto")
 
 	$nombre=$_POST['nombre'];
 	$idCategoria=$_POST['categorias'];
-	$descripcion=$_POST['descripcion'];
 	$precio=$_POST['precio'];
+	$cantidad=$_POST['cantidad'];
 
-
-	$resultado=$conexion->ejecutar("INSERT into producto values (null, $idCategoria, '$nombre','$descripcion',$precio,0)");
+	$resultado=$conexion->ejecutar("INSERT into producto values (null, '$nombre', $idCategoria,$precio,$cantidad, 1)");
 
 	if(gettype($resultado)=="string")
 	{
@@ -34,7 +33,7 @@ elseif($accion=="Eliminar producto")
 
 	$idProducto=$_POST['productosSelect'];
 
-	$resultado=$conexion->ejecutar("DELETE from producto where id_producto=$idProducto and cantidad_producto=0");
+	$resultado=$conexion->ejecutar("UPDATE producto set estado=0 where idproducto=$idProducto");
 
 	if(gettype($resultado)=="string")
 	{
@@ -49,10 +48,7 @@ elseif($accion=="Eliminar producto")
 		echo "Se elimino el producto";
 	}
 }
-
-
- ?>
-
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -60,14 +56,12 @@ elseif($accion=="Eliminar producto")
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<title>*</title>
+	<title>Inventario</title>
 
 	<script src="js/Jquery.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/inventario.js"></script>
-	
-
 </head>
 
 <body style="background: #34495E;">	
@@ -117,6 +111,6 @@ elseif($accion=="Eliminar producto")
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>

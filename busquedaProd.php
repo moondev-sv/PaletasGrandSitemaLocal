@@ -4,6 +4,9 @@
     require_once 'Core/DB.php';
 
     if (isset($_POST['cargarProductos'])) {
+        @session_destroy();
+        @session_start();
+
         $_SESSION['ventaActual'] = 0;
         $_SESSION['copiaDb'] = 0;
         $connection = new BaseDatos();
@@ -40,8 +43,8 @@
     
     if (isset($_POST['alterarTabla'])) {
         if($_POST['alterarTabla'] == 'agg') {
-            $copiaDb = $_POST['copiaDb'];
-            $ventaActual = $_POST['ventaActual'];
+            $copiaDb = $_SESSION['copiaDb'];
+            $ventaActual = $_SESSION['ventaActual'];
 
             $cant = $_POST['cantidad'];
             $posProd = $_POST['posicionProd'];
@@ -50,28 +53,20 @@
             $copiaDb[$posProd]['cant_producto'] -= $cant;
             $ventaActual[$posProd]['cant_producto'] += $cant;
 
+
             if ($ventaActual != 0) {
                 for ($i=0; $i < count($ventaActual); $i++) { 
                     if ($ventaActual[$i]['cant_producto'] > 0) {
-                        $html .= "<tr><td>" . $ventaActual[$i]['nom_producto'] . "</td><td>" . $ventaActual[$i]['cant_producto'] . " unidades</td><td>$1.50</td><td><button type='button' class='btn btn-outline-danger 
+                        $html .= "<tr><td>" . $ventaActual[$i]['nom_producto'] . "</td><td>" . $ventaActual[$i]['cant_producto'] . " unidades</td><td>" . ($ventaActual[$i]['precio_producto'] * $cant) . "</td><td><button type='button' class='btn btn-outline-danger 
                         Cancel Outline Object' data-toggle='modal' value='" . $i . "' onclick='puente(this)' data-target='#delModal'>Eliminar</button></td></tr>";
                     }
                 }
             }
 
-            $_POST['copiaDb'] = $copiaDb;
-            $_POST['ventaActual'] = $ventaActual;
+            $_SESSION['copiaDb'] = $copiaDb;
+            $_SESSION['ventaActual'] = $ventaActual;
 
             echo $html;
         }
     }
-
-    if (isset($_POST['cerrarSesion'])) {
-        @session_destroy();
-    }
-
-
-    
-
-
 ?>

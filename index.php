@@ -101,8 +101,8 @@
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="addResult">
+                            <!--<tr>
                                 <td>Paleta</td>
                                 <td>10 unidades</td>
                                 <td>$1.50</td>
@@ -115,7 +115,7 @@
                                 <td>$1.50</td>
                                 <td><button type="button" class="btn btn-outline-danger Cancel Outline Object"
                                         data-toggle="modal" data-target="#delModal">Eliminar</button></td>
-                            </tr>
+                            </tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -207,13 +207,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
 
-                    <center><input id="txtSearchProduct" placeholder="Ingrese la cantidad de productos" type="text"
+                    <center><input id="txtCantAgg" placeholder="Ingrese la cantidad de productos" type="text"
                             class="form-control form-control" onkeypress="validarSiNumero(event);"></center>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="alterarTabla(this.value);">Aceptar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="alterarTabla('agg');">Aceptar</button>
                 </div>
 
             </div>

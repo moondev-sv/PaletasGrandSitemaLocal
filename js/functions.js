@@ -25,28 +25,35 @@ function puente(obj) {
     document.getElementById('puente').value = obj.value;
 }
 
-function alterarTabla(cant, accion) {
-    var cant = cant;
-    var id = document.getElementById('puente').value;
+function alterarTabla(accion) {
+    var cant = document.getElementById('txtCantAgg').value;
 
-    var datos = {
-        "alterarTabla": accion,
-        "cantidad": cant,
-        "posicionProd": id
-    };
+    if (cant != "") {        
+        var id = document.getElementById('puente').value;
+        var showResult = document.getElementById("addResult");
 
-    $.ajax({
-        url: 'busquedaProd.php',
-        type: 'POST',
-        data: datos,
-        success: function (Respuesta) {
-            //console.log(Respuesta);    
-            searchProduct();
-        },
-        error: function (xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
-        }
-    });
+        var datos = {
+            "alterarTabla": accion,
+            "cantidad": cant,
+            "posicionProd": id
+        };
+
+        $.ajax({
+            url: 'busquedaProd.php',
+            type: 'POST',
+            data: datos,
+            success: function (Respuesta) {
+                //console.log(Respuesta);    
+                showResult.innerHTML = Respuesta;
+                searchProduct();
+            },
+            error: function (xhr) {
+                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            }
+        });
+
+        document.getElementById('txtCantAgg').value = "";
+    }
 }
 
 function startSale() {

@@ -77,7 +77,7 @@ function obtenerVentasTotalesInicial()
 	        {
 	        	var btblventasTotales = document.getElementById('btblventasTotales');
 
-	        	btblventasTotales.innerHTML+=respuesta;
+	        	btblventasTotales.innerHTML=respuesta;
 	        }
 	    });
 }
@@ -127,4 +127,10 @@ function alternarFiltro()
 		lblFiltro.classList.remove('d-none');
 	else
 		lblFiltro.classList.add('d-none');
+}
+
+function asignarIdTicket(idTicket)
+{
+	document.getElementById('idTicketHidden').value=idTicket;
+	
 }

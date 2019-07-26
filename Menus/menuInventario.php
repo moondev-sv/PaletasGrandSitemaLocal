@@ -56,6 +56,7 @@
 											<th>Total</th>
 											<th>Forma de pago</th>
 											<th>Estado</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody id='btblventasTotales'>
@@ -73,6 +74,42 @@
 				</div>
 			</div>
 		</div>
+
+<!-- Modal para cambiar estado de un ticket -->
+		<div class="modal fade" id="cambiarEstadoTicketModal" tabindex="-1" role="dialog" aria-labelledby="modal para cambiar estado de un ticket" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Cambiar estado de ticket</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<form action="" method="POST">
+								<label for="estadoTicket">Seleccione el estado del ticket:
+									<select name="estadoTicket" id="estadoTicket">
+										<option value="0">Activo</option>
+										<option value="1">Anulado</option>
+										<option value="2">Devolucion</option>
+									</select>
+								</label>
+								<input type="hidden" name="idTicketHidden" id="idTicketHidden">
+								<input type="submit" name="accion" value="Cambiar estado">
+							</form>
+
+							
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<div class="col-2 py-3 barra">
 			<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 				<button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

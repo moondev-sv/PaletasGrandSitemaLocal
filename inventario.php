@@ -30,10 +30,50 @@ elseif($accion=="obtenerVentasTotales")
 
 	$conexion=new BaseDatos();
 
+	$fecha=$_POST['fecha'];
 
-	$resultado=$conexion->ejecutar("SELECT * from producto where estado=1");
+	$resultado=$conexion->ejecutar("SELECT T.numero_ticket,T.fecha,V.subtotal,V.total,FP.descripcion,T.estado FROM venta as V inner join forma_pago as FP on FP.idforma_pago = V.id_formapago inner join ticket as T on T.id_venta= V.idventa where Date(T.fecha)='$fecha' ");
 
-	echo json_encode($resultado);
+
+	if($resultado==0)
+		echo "<tr><td colspan='7'>No hay ventas este día</td></tr>";
+	else
+	{
+		foreach ($resultado as $key) {
+			echo "	<tr><td>".$key['numero_ticket']."</td>
+					<td>".$key['fecha']."</td>
+					<td>".$key['subtotal']."</td>
+					<td>".$key['total']."</td>
+					<td>".$key['descripcion']."</td>
+					<td>".$key['estado']."</td>";
+		}
+	}
+}
+elseif($accion=="obtenerVentasTotalesRangoFechas")
+{
+	require_once('Core/DB.php');
+
+	$conexion=new BaseDatos();
+
+	$fechaInicial=$_POST['fechaInicial'];
+	$fechaFinal=$_POST['fechaFinal'];
+
+	$resultado=$conexion->ejecutar("SELECT T.numero_ticket,T.fecha,V.subtotal,V.total,FP.descripcion,T.estado FROM venta as V inner join forma_pago as FP on FP.idforma_pago = V.id_formapago inner join ticket as T on T.id_venta= V.idventa where Date(T.fecha)>='$fechaInicial' and Date(T.fecha)<='$fechaFinal' ");
+
+
+	if($resultado==0)
+		echo "<tr><td colspan='7'>No hay ventas en este rango de fechas</td></tr>";
+	else
+	{
+		foreach ($resultado as $key) {
+			echo "	<tr><td>".$key['numero_ticket']."</td>
+					<td>".$key['fecha']."</td>
+					<td>".$key['subtotal']."</td>
+					<td>".$key['total']."</td>
+					<td>".$key['descripcion']."</td>
+					<td>".$key['estado']."</td>";
+		}
+	}
 }
 
 

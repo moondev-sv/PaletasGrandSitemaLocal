@@ -62,12 +62,7 @@ function obtenerVentasTotales()
 
 	var fechaInicial = document.getElementById('filtroDiaInicial');
 	
-	alert(fecha.getFullYear() + "-"+(fecha.getMonth()+1)+"-"+fecha.getDate());
-
 	var aux = Date.UTC(fecha.getFullYear() , fecha.getMonth(), fecha.getDate());
-
-	alert((aux));
-
 
 	fechaInicial.valueAsNumber=aux;
 

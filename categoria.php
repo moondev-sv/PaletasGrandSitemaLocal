@@ -1,7 +1,7 @@
 <?php
 include("Core/DB.php");
 $BD = new BaseDatos();
-$campos[0] = "id_categoria";
+$campos[0] = "idcategoria";
 $campos[1] = "nom_categoria";
 $valores[0] = "";
 $datos = $BD->selectGeneral("categoria");
@@ -9,9 +9,8 @@ $html = "";
 foreach ($datos as $key => $value) {
 	$html .="<tr>
 				<td>".$value['nom_categoria']."</td>
-				<td> <button onclick='obtener(".$value['id_categoria'].")'>Editar</button>,<button onclick='eliminar(".$value['id_categoria'].")'>Eliminar</button></td>
+				<td> <button onclick='obtener(".$value['idcategoria'].")'>Editar</button>,<button onclick='eliminar(".$value['idcategoria'].")'>Eliminar</button></td>
 			</tr>";
-
 }
 //----------------------------------------------------------
 //--------------------------PARA GUARDAR UNA NUEVA CATEGORIA
@@ -34,7 +33,7 @@ if(isset($_POST["guardar"])){
 //----------------------------------------------------------
 if(($_POST["bandera"])=="eliminar"){
 	$id = $_POST['id'];
-	$BD->deleteGeneral("categoria","id_categoria",$id);
+	$BD->deleteGeneral("categoria","idcategoria",$id);
 	echo 1;
 }
 //----------------------------------------------------------
@@ -42,12 +41,12 @@ if(($_POST["bandera"])=="eliminar"){
 //----------------------------------------------------------
 if(($_POST["bandera"])=="obtener"){
 	$id = $_POST['id'];
-	$resultado = $BD->selectbyidGeneral("categoria","id_categoria",$id);
+	$resultado = $BD->selectbyidGeneral("categoria","idcategoria",$id);
 	$html ="";
 	foreach ($resultado as $key => $value) {
 		$html .="
 		<input id='nombre_categoria' value='".$value['nom_categoria']."'></input>
-		<button onclick='editar(".$value['id_categoria'].")'>Actualizar</button>
+		<button onclick='editar(".$value['idcategoria'].")'>Actualizar</button>
 	";
 	}
 }

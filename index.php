@@ -151,23 +151,23 @@
                     <div class="form-check" style="margin: 5px;">
                         <label class="form-check-label" for="radio1">
                             <input type="radio" class="form-check-input" id="radio1" name="optradio" value="4"
-                                checked>Efectivo
+                                checked onchange="pago(this);">Efectivo
                         </label>
                     </div>
                     <div class="form-check" style="margin: 5px;">
                         <label class="form-check-label" for="radio2">
                             <input type="radio" class="form-check-input" id="radio2" name="optradio"
-                                value="5">Tarjeta de cr&eacute;dito
+                                value="5" onchange="pago(this);">Tarjeta de cr&eacute;dito
                         </label>
                     </div>
-
-                    <center><input id="txtSearchProduct" style="margin: 5px;" placeholder="Ingrese el pago recibido" type="text"
-                            class="form-control form-control"></center>
+                    <input type="hidden" id="fPago">
+                    <center><input id="pagar" value='0' style="margin: 5px;" placeholder="Ingrese el pago recibido" type="text"
+                            class="form-control form-control" onkeypress="validarPago(event);"></center>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Finalizar Venta</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="finalizarPago();">Finalizar Venta</button>
                 </div>
 
             </div>
@@ -233,13 +233,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
 
-                    <center><input id="txtSearchProduct" placeholder="Ingrese la cantidad de productos" type="text"
+                    <center><input id="txtCantDel" placeholder="Ingrese la cantidad de productos" type="text"
                             class="form-control form-control" onkeypress="validarSiNumero(event);"></center>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="alterarTabla('del');">Aceptar</button>
                 </div>
 
             </div>

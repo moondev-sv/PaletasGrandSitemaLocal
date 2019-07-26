@@ -21,15 +21,83 @@ function searchProduct() {
     });
 }
 
-function total() {
+function total(accion) {
     $.ajax({
         url: 'busquedaProd.php',
         type: 'POST',
-        data: {"totalizar": 1},
+        data: {
+            "totalizar": 1
+        },
         success: function (Respuesta) {
             //console.log(Respuesta); 
-            document.getElementById('subtotal').innerHTML = "Subtotal: $" + Respuesta;
-            document.getElementById('total').innerHTML = "Total: $" + Respuesta;
+            if (accion == 1) {
+                document.getElementById('pagar').value = Respuesta;
+                totalPagar = Respuesta;
+            } else {
+                document.getElementById('subtotal').innerHTML = "Subtotal: $" + Respuesta;
+                document.getElementById('total').innerHTML = "Total: $" + Respuesta;
+            }
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    });
+}
+
+function pago(element) {
+    if (element.value == 5) {
+        total(1);
+    }
+
+    document.getElementById('fPago').value = element.value;
+}
+
+function realizarCompra(fPago, monto, total) {
+    $.ajax({
+        url: 'busquedaProd.php',
+        type: 'POST',
+        data: {
+            "finalizaP" : 1,
+            "formaPago" : fPago,
+            "monto"     : monto,
+            "pagar"     : total
+        },
+        success: function (Respuesta) {
+            //console.log(Respuesta); 
+            alert('imprimiento');
+            startSale();
+            document.getElementById('pagar').value = 0;
+            document.getElementById("addResult").innerHTML = "";
+            document.getElementById('subtotal').innerHTML = "Subtotal: $0";
+            document.getElementById('total').innerHTML = "Total: $0";
+            console.log(Respuesta);
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    });
+}
+
+function finalizarPago() {
+    $.ajax({
+        url: 'busquedaProd.php',
+        type: 'POST',
+        data: {
+            "totalizar": 1
+        },
+        success: function (Respuesta) {
+            //console.log(Respuesta); 
+            var totalPagar = Respuesta;
+
+            var pago = document.getElementById('pagar').value;
+        
+            if (totalPagar > 0) {
+                if (pago.trim() === "" || pago < totalPagar) {
+                    alert('No es suficiente pagar el total de: $' + totalPagar);
+                } else {
+                    realizarCompra(document.getElementById('fPago').value, pago, totalPagar);
+                }
+            }
         },
         error: function (xhr) {
             alert("An error occured: " + xhr.status + " " + xhr.statusText);
@@ -42,7 +110,12 @@ function puente(obj) {
 }
 
 function alterarTabla(accion) {
-    var cant = document.getElementById('txtCantAgg').value;
+
+    if (accion === "agg") {
+        var cant = document.getElementById('txtCantAgg').value;
+    } else {
+        var cant = document.getElementById('txtCantDel').value;
+    }
 
     if (cant != "") {
         var id = document.getElementById('puente').value;
@@ -66,7 +139,7 @@ function alterarTabla(accion) {
 
                     showResult.innerHTML = Respuesta;
                     searchProduct();
-                    total();
+                    total(2);
                 }
             },
             error: function (xhr) {
@@ -75,6 +148,7 @@ function alterarTabla(accion) {
         });
 
         document.getElementById('txtCantAgg').value = "";
+        document.getElementById('txtCantDel').value = "";
     }
 }
 
@@ -102,5 +176,14 @@ function validarSiNumero(e) {
 
     if (key < 48 || key > 57) {
         e.preventDefault();
+    }
+}
+function validarPago(e) {
+    var key = e.charCode;
+
+    if (key != 46) {
+        if (key < 48 || key > 57) {
+            e.preventDefault();
+        }
     }
 }

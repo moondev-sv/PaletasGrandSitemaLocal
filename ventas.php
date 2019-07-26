@@ -5,10 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 	<title>*</title>
 </head>
 
 <body style="background: #34495E;">	
+	
 	<!--estilos contenedores-->
 	<style type="text/css">
 		.encabezado{height: 80px; background: #34495E;}
@@ -25,12 +30,12 @@
 	?>
 		<div class="container">
 			Seleccione el filtro de fecha 
-		<select name="" id="">
-			<option value="">6 HORAS</option>
-			<option value="">12 HORAS</option>
-			<option value="">1 DIA</option>
-			<option value="">1 SEMANA</option>
-			<option value="">1 MES</option>
+		<select name="" id="filtro_fecha" onchange="recargar_tabla()">
+			<option value="1">6 HORAS</option>
+			<option value="2">12 HORAS</option>
+			<option value="3">1 DIA</option>
+			<option value="4">1 SEMANA</option>
+			<option value="5">1 MES</option>
 			</select>
 		</div>
 		<div>
@@ -42,18 +47,27 @@
 					<td>PRECIO UNITARIO</td>
 					<td>PRECIO TOTAL</td>
 				</thead>
-				<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<tbody id="cuerpo_tabla">
+			
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
+	<script>
+	$(document).ready(function(){
+		recargar_tabla();
+	});
+	function recargar_tabla(){
+		var fecha = $("#filtro_fecha option:selected").val();
+		$.post( "tabla_ventas.php", { bandera: "recargar",fecha:fecha} )
+				.done(function( data ) {
+					$("#cuerpo_tabla").html(data);
+				});
+	}
+
+
+	</script>
+
 </body>
+
 </html>

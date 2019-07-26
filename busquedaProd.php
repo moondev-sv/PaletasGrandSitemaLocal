@@ -40,6 +40,19 @@
             echo $html;
         }        
     }
+
+    if (isset($_POST['totalizar'])) {
+        $ventaActual = $_SESSION['ventaActual'];
+        $total = 0;
+
+        if ($ventaActual != 0) {
+            for ($i=0; $i < count($ventaActual); $i++) { 
+                $total += (double) ($ventaActual[$i]['precio_producto'] * $ventaActual[$i]['cant_producto']);
+            }
+    
+            echo $total;
+        }
+    }
     
     if (isset($_POST['alterarTabla'])) {
         if($_POST['alterarTabla'] == 'agg') {
@@ -50,23 +63,28 @@
             $posProd = $_POST['posicionProd'];
             $html = "";
 
-            $copiaDb[$posProd]['cant_producto'] -= $cant;
-            $ventaActual[$posProd]['cant_producto'] += $cant;
-
-
-            if ($ventaActual != 0) {
-                for ($i=0; $i < count($ventaActual); $i++) { 
-                    if ($ventaActual[$i]['cant_producto'] > 0) {
-                        $html .= "<tr><td>" . $ventaActual[$i]['nom_producto'] . "</td><td>" . $ventaActual[$i]['cant_producto'] . " unidades</td><td>" . ($ventaActual[$i]['precio_producto'] * $cant) . "</td><td><button type='button' class='btn btn-outline-danger 
-                        Cancel Outline Object' data-toggle='modal' value='" . $i . "' onclick='puente(this)' data-target='#delModal'>Eliminar</button></td></tr>";
+            if ($copiaDb[$posProd]['cant_producto'] - $cant < 0) {
+                echo "1";
+            } else {
+                $copiaDb[$posProd]['cant_producto'] -= $cant;
+                $ventaActual[$posProd]['cant_producto'] += $cant;
+    
+    
+                if ($ventaActual != 0) {
+                    for ($i=0; $i < count($ventaActual); $i++) { 
+                        if ($ventaActual[$i]['cant_producto'] > 0) {
+                            $html .= "<tr><td>" . $ventaActual[$i]['nom_producto'] . "</td><td>" . $ventaActual[$i]['cant_producto'] . " unidades</td><td>" . ($ventaActual[$i]['precio_producto'] * $cant) . "</td><td><button type='button' class='btn btn-outline-danger 
+                            Cancel Outline Object' data-toggle='modal' value='" . $i . "' onclick='puente(this)' data-target='#delModal'>Eliminar</button></td></tr>";
+                        }
                     }
                 }
+    
+                $_SESSION['copiaDb'] = $copiaDb;
+                $_SESSION['ventaActual'] = $ventaActual;
+    
+                echo $html;
             }
 
-            $_SESSION['copiaDb'] = $copiaDb;
-            $_SESSION['ventaActual'] = $ventaActual;
-
-            echo $html;
         }
     }
 ?>

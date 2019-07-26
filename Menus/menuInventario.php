@@ -2,9 +2,9 @@
 	<div class="form-row text-center">
 		<div class="col-2 py-3 barra">
 			<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-				<button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<!--<button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Reportes
-				</button>
+				</button>-->
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 					<a class="dropdown-item" data-toggle="modal" data-target="#reporteProductosVendidos">
 						<button class="btn btn-info"
@@ -293,7 +293,7 @@
 		</div>
 	</div>
 	<div class="col-2 py-3 barra">
-		<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+		<!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 			<button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			Caja
 			</button>
@@ -301,7 +301,7 @@
 				<a class="dropdown-item" href="reportes.php">Reportes Z, X</a>
 				<a class="dropdown-item" href="admincaja.php">Operaciones caja</a>
 			</div>
-		</div>
+		</div>-->
 	</div>
 	<div class="col-3 py-3 barra">
 		<a href="index.php" class="btn btn-primary btn-lg">Listo</a>

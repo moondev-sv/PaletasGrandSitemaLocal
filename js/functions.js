@@ -21,6 +21,22 @@ function searchProduct() {
     });
 }
 
+function total() {
+    $.ajax({
+        url: 'busquedaProd.php',
+        type: 'POST',
+        data: {"totalizar": 1},
+        success: function (Respuesta) {
+            //console.log(Respuesta); 
+            document.getElementById('subtotal').innerHTML = "Subtotal: $" + Respuesta;
+            document.getElementById('total').innerHTML = "Total: $" + Respuesta;
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    });
+}
+
 function puente(obj) {
     document.getElementById('puente').value = obj.value;
 }
@@ -28,7 +44,7 @@ function puente(obj) {
 function alterarTabla(accion) {
     var cant = document.getElementById('txtCantAgg').value;
 
-    if (cant != "") {        
+    if (cant != "") {
         var id = document.getElementById('puente').value;
         var showResult = document.getElementById("addResult");
 
@@ -43,9 +59,15 @@ function alterarTabla(accion) {
             type: 'POST',
             data: datos,
             success: function (Respuesta) {
-                //console.log(Respuesta);    
-                showResult.innerHTML = Respuesta;
-                searchProduct();
+                //console.log(Respuesta); 
+                if (Respuesta === "1") {
+                    alert('no hay suficiente producto');
+                } else {
+
+                    showResult.innerHTML = Respuesta;
+                    searchProduct();
+                    total();
+                }
             },
             error: function (xhr) {
                 alert("An error occured: " + xhr.status + " " + xhr.statusText);

@@ -120,10 +120,10 @@
                     </table>
                 </div>
                 <h4>
-                    <p>Subtotal: $0.00</p>
+                    <p id="subtotal">Subtotal: $0.00</p>
                 </h4>
                 <h4>
-                    <p>Total: $0.00</p>
+                    <p id="total">Total: $0.00</p>
                 </h4>
                 <button type="button" class="btn btn-outline-success Accept Outline Object" data-toggle="modal" data-target="#processPayment">Finalizar Venta</button>
                 <button type="button" class="btn btn-outline-danger Cancel Outline Object" data-toggle="modal" data-target="#cancelPayment">Cancelar Venta</button>
@@ -187,7 +187,7 @@
                 <!-- Modal footer -->
                 <div class="modal-body" style="text-align: center;">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 100px;">No</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" style="width: 100px;">Si</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" style="width: 100px;" onclick='window.location.reload(true);'>Si</button>
                 </div>
 
             </div>

@@ -48,6 +48,28 @@ elseif($accion=="Eliminar producto")
 		echo "Se elimino el producto";
 	}
 }
+elseif($accion=="Cambiar estado")
+{
+	require_once('Core/DB.php');
+
+	$conexion=new BaseDatos();
+
+
+	$estadoTicket=$_POST['estadoTicket'];
+	$idTicket=$_POST['idTicketHidden'];
+
+	$resultado=$conexion->ejecutar("UPDATE ticket set estado=$estadoTicket where idticket=$idTicket");
+
+	if(gettype($resultado)=="string")
+	{
+		echo "Error: $resultado";
+	}
+	else
+	{
+		echo "Se cambio el estado";
+	}
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

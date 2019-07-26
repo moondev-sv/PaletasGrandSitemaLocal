@@ -32,7 +32,7 @@ elseif($accion=="obtenerVentasTotales")
 
 	$fecha=$_POST['fecha'];
 
-	$resultado=$conexion->ejecutar("SELECT T.numero_ticket,T.fecha,V.subtotal,V.total,FP.descripcion,T.estado FROM venta as V inner join forma_pago as FP on FP.idforma_pago = V.id_formapago inner join ticket as T on T.id_venta= V.idventa where Date(T.fecha)='$fecha' ");
+	$resultado=$conexion->ejecutar("SELECT T.numero_ticket,T.fecha,V.subtotal,V.total,FP.descripcion,T.estado,T.idticket FROM venta as V inner join forma_pago as FP on FP.idforma_pago = V.id_formapago inner join ticket as T on T.id_venta= V.idventa where Date(T.fecha)='$fecha' ");
 
 
 	if($resultado==0)
@@ -42,10 +42,25 @@ elseif($accion=="obtenerVentasTotales")
 		foreach ($resultado as $key) {
 			echo "	<tr><td>".$key['numero_ticket']."</td>
 					<td>".$key['fecha']."</td>
-					<td>".$key['subtotal']."</td>
-					<td>".$key['total']."</td>
+					<td>$".$key['subtotal']."</td>
+					<td>$".$key['total']."</td>
 					<td>".$key['descripcion']."</td>
-					<td>".$key['estado']."</td>";
+					<td>";
+			switch($key['estado'])
+			{
+				case 0:
+					echo "Activo";
+					break;
+				case 1:
+					echo "Anulado";
+					break;
+				case 2:
+					echo "Devolucion";
+					break;
+			} 
+			echo "</td>";
+			echo "<td><button class='btn btn-info' data-toggle='modal' data-target='#cambiarEstadoTicketModal'
+					data-mod='' onclick='asignarIdTicket(".$key['idticket'].")'>Cambiar estado</button></td></tr>";
 		}
 	}
 }
@@ -58,7 +73,7 @@ elseif($accion=="obtenerVentasTotalesRangoFechas")
 	$fechaInicial=$_POST['fechaInicial'];
 	$fechaFinal=$_POST['fechaFinal'];
 
-	$resultado=$conexion->ejecutar("SELECT T.numero_ticket,T.fecha,V.subtotal,V.total,FP.descripcion,T.estado FROM venta as V inner join forma_pago as FP on FP.idforma_pago = V.id_formapago inner join ticket as T on T.id_venta= V.idventa where Date(T.fecha)>='$fechaInicial' and Date(T.fecha)<='$fechaFinal' ");
+	$resultado=$conexion->ejecutar("SELECT T.numero_ticket,T.fecha,V.subtotal,V.total,FP.descripcion,T.estado,T.idticket FROM venta as V inner join forma_pago as FP on FP.idforma_pago = V.id_formapago inner join ticket as T on T.id_venta= V.idventa where Date(T.fecha)>='$fechaInicial' and Date(T.fecha)<='$fechaFinal' ");
 
 
 	if($resultado==0)
@@ -68,10 +83,25 @@ elseif($accion=="obtenerVentasTotalesRangoFechas")
 		foreach ($resultado as $key) {
 			echo "	<tr><td>".$key['numero_ticket']."</td>
 					<td>".$key['fecha']."</td>
-					<td>".$key['subtotal']."</td>
-					<td>".$key['total']."</td>
+					<td>$".$key['subtotal']."</td>
+					<td>$".$key['total']."</td>
 					<td>".$key['descripcion']."</td>
-					<td>".$key['estado']."</td>";
+					<td>";
+			switch($key['estado'])
+			{
+				case 0:
+					echo "Activo";
+					break;
+				case 1:
+					echo "Anulado";
+					break;
+				case 2:
+					echo "Devolucion";
+					break;
+			} 
+			echo "</td>";
+			echo "<td><button class='btn btn-info' data-toggle='modal' data-target='#cambiarEstadoTicketModal'
+					data-mod='' onclick='asignarIdTicket(".$key['idticket'].")'>Cambiar estado</button></td></tr>";
 		}
 	}
 }

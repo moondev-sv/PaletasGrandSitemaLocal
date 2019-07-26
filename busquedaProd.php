@@ -41,7 +41,8 @@
 
         $connection = new BaseDatos();
         $tiket = $connection->ejecutar("select * from ticket where idticket = (select max(idticket) from ticket);"); 
-        $MaxTicketN = $tiket[0]['numero_ticket'];
+        $MaxTicketN = 0;
+        $MaxTicketN += $tiket[0]['numero_ticket'];
         $MaxTicketN++;
 
         $connection = new BaseDatos();

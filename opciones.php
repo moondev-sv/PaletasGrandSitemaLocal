@@ -1,6 +1,6 @@
 <?php 
 
-$accion=$_POST['accion'];
+@$accion=$_POST['accion'];
 
 if($accion=="Agregar producto")
 {

@@ -1,4 +1,6 @@
 <?php
+    @session_start();
+
     include_once 'Core/Variables.php';
     include_once 'Core/DB.php';
 ?>
@@ -146,14 +148,14 @@
 
                     <div class="form-check" style="margin: 5px;">
                         <label class="form-check-label" for="radio1">
-                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1"
+                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="4"
                                 checked>Efectivo
                         </label>
                     </div>
                     <div class="form-check" style="margin: 5px;">
                         <label class="form-check-label" for="radio2">
                             <input type="radio" class="form-check-input" id="radio2" name="optradio"
-                                value="option2">Tarjeta de cr&eacute;dito
+                                value="5">Tarjeta de cr&eacute;dito
                         </label>
                     </div>
 

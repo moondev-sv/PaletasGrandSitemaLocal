@@ -56,7 +56,7 @@ function obtenerProductosctivos()
     });
 }
 
-function obtenerVentasTotales()
+function obtenerVentasTotalesInicial()
 {
 	var fecha = new Date();
 
@@ -70,28 +70,53 @@ function obtenerVentasTotales()
 	$.ajax({
 	        type      : 'post',
 	        url       : 'inventario.php',
-	        data      : {accion: "obtenerVentasTotales"},
+	        data      : {accion: "obtenerVentasTotales", fecha : fecha.getFullYear() +"-"+ (fecha.getMonth()+1) 
+	        				+"-"+ fecha.getDate()},
 	        Async	  : false,
 	        success   : function(respuesta)
 	        {
-	        	var obj=JSON.parse(respuesta);
+	        	var btblventasTotales = document.getElementById('btblventasTotales');
 
-	    	  	//alert(obj.length);
-
-	         	var select=document.getElementById("productosSelect"); 
-
-	         	for (var i = 0; i < select.length; i++) {
-	         		select.remove(0);
-	         	}
-
-	         	for (var i = 0; i < obj.length; i++) {
-	         		var option = document.createElement("option");
-					option.text = obj[i].nom_producto;
-					option.value=obj[i].idproducto;
-					select.add(option);
-	         	}
+	        	btblventasTotales.innerHTML+=respuesta;
 	        }
 	    });
+}
+
+function obtenerVentasTotales()
+{
+	if(document.getElementById('rangoHoras').checked)
+	{
+		$.ajax({
+	        type      : 'post',
+	        url       : 'inventario.php',
+	        data      : {	accion: "obtenerVentasTotalesRangoFechas", 
+	        				fechaInicial : document.getElementById('filtroDiaInicial').value,
+	        				fechaFinal : document.getElementById('filtroDiaFinal').value},
+	        Async	  : false,
+	        success   : function(respuesta)
+	        {
+	        	var btblventasTotales = document.getElementById('btblventasTotales');
+
+	        	btblventasTotales.innerHTML=respuesta;
+	        }
+	    });
+	}
+	else
+	{
+		$.ajax({
+	        type      : 'post',
+	        url       : 'inventario.php',
+	        data      : {accion: "obtenerVentasTotales", 
+	        				fecha : document.getElementById('filtroDiaInicial').value},
+	        Async	  : false,
+	        success   : function(respuesta)
+	        {
+	        	var btblventasTotales = document.getElementById('btblventasTotales');
+
+	        	btblventasTotales.innerHTML=respuesta;
+	        }
+	    });
+	}
 }
 
 function alternarFiltro()

@@ -8,7 +8,7 @@
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 					<a class="dropdown-item" href="ventas.php">Productos Vendidos</a>
 					<button class="btn btn-info" data-toggle="modal" data-target="#reporteDeVentasModal"
-					data-mod="" onclick="obtenerVentasTotales()">Ventas Totales</button>
+					data-mod="" onclick="obtenerVentasTotalesInicial()">Ventas Totales</button>
 				</div>
 			</div>
 		</div>
@@ -22,63 +22,54 @@
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form method="post" action="" class="form-group">
-						<div class="modal-body">
-							<div class="container">
+					<div class="modal-body">
+						<div class="container">
 
-								<div class="Table InfoProduct" style="margin-top: 25px;">
+							<div class="Table InfoProduct" style="margin-top: 25px;">
 
-									<h1>Ventas totales</h1>
+								<h1>Ventas totales</h1>
 
-									<label for="filtroDiaInicial">
-										Filtro de fechas:&nbsp;
-										<input type="date" name="filtroDiaInicial" id="filtroDiaInicial" value="2000-05-12">
-									</label>
+								<label for="filtroDiaInicial">
+									Filtro de fechas:&nbsp;
+									<input type="date" name="filtroDiaInicial" id="filtroDiaInicial" value="">
+								</label>
 
-									<label for="filtroDiaFinal" id="filtroDiaFinalLabel" class="d-none">&nbsp;-&nbsp;
-										<input type="date" name="filtroDiaFinal" id="filtroDiaFinal">
-									</label>
+								<label for="filtroDiaFinal" id="filtroDiaFinalLabel" class="d-none">&nbsp;-&nbsp;
+									<input type="date" name="filtroDiaFinal" id="filtroDiaFinal">
+								</label>
 
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<label for="rangoHoras">
-										<input type="checkbox" name="rangoHoras" id="rangoHoras" onclick="alternarFiltro()">
-										Rango de horas
-									</label>
-									
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="rangoHoras">
+									<input type="checkbox" name="rangoHoras" id="rangoHoras" onclick="alternarFiltro()">
+									Rango de fechas
+								</label>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<button onclick="obtenerVentasTotales()">Filtrar</button>
 
 
-									<table class="table table-hover">
-										<thead>
-											<tr>
-												<th>Fecha</th>
-												<th>Sub-Total</th>
-												<th>Total</th>
-												<th>Forma de pago</th>
-												<th>Estado</th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody id='searchResult'>
-											<tr>
-												<td>Paleta</td>
-												<td>$1.50</td>
-												<td>10 unidades</td>
-												<td>10 unidades</td>
-												<td>10 unidades</td>
-												<td><button type="button" class="btn btn-outline-primary Normal Outline Object"
-												data-toggle="modal" data-target="#aggModal">Agregar</button></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-									
-								
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Numero de ticket</th>
+											<th>Fecha</th>
+											<th>Sub-Total</th>
+											<th>Total</th>
+											<th>Forma de pago</th>
+											<th>Estado</th>
+										</tr>
+									</thead>
+									<tbody id='btblventasTotales'>
+
+									</tbody>
+								</table>
 							</div>
+								
+							
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
-						</div>
-					</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+					</div>
 				</div>
 			</div>
 		</div>

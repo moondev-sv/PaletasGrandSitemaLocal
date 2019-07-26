@@ -74,7 +74,7 @@ elseif($accion=="Eliminar producto")
 	</style>	
 
 	<!--Barra de menu opciones-->
-	<?php include("Menus/menuinventario.php"); ?>
+	<?php include("Menus/menuInventario.php"); ?>
 
 	<!--seccion de la tabla de reportes-->
 	<div class="container">

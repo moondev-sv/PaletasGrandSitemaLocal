@@ -1,6 +1,6 @@
 <?php 
 
-$accion=$_POST['accion'];
+@$accion=$_POST['accion'];
 
 if($accion=="Agregar producto")
 {
@@ -74,7 +74,7 @@ elseif($accion=="Eliminar producto")
 	</style>	
 
 	<!--Barra de menu opciones-->
-	<?php include("Menus/menuinventario.php"); ?>
+	<?php include("Menus/menuInventario.php"); ?>
 
 	<!--seccion de la tabla de reportes-->
 	<div class="container">

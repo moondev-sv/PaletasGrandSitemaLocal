@@ -21,6 +21,8 @@
 </head>
 
 <body onload="startSale();">
+    <input type="hidden" id='puente'>
+
     <div class="MainContainer">
         <div class="HeaderForm">
             <div class="Object title">

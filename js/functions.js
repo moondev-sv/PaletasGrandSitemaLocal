@@ -21,18 +21,32 @@ function searchProduct() {
     });
 }
 
-function puenteProd() {
-    
+function puente(obj) {
+    document.getElementById('puente').value = obj.value;
 }
 
 function alterarTabla(cant, accion) {
     var cant = cant;
+    var id = document.getElementById('puente').value;
 
     var datos = {
-        accion: 1,
+        "alterarTabla": accion,
         "cantidad": cant,
-        "posicionProd": 
+        "posicionProd": id
     };
+
+    $.ajax({
+        url: 'busquedaProd.php',
+        type: 'POST',
+        data: datos,
+        success: function (Respuesta) {
+            //console.log(Respuesta);    
+            searchProduct();
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    });
 }
 
 function startSale() {

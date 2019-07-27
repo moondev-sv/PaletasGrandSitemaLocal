@@ -45,7 +45,7 @@ function total(accion) {
 }
 
 function pago(element) {
-    if (element.value == 5) {
+    if (element.value == 10) {
         total(1);
     }
 
@@ -64,7 +64,7 @@ function realizarCompra(fPago, monto, total) {
         },
         success: function (Respuesta) {
             //console.log(Respuesta); 
-            alert('imprimiento');
+            alert('imprimiento ');
             startSale();
             document.getElementById('pagar').value = 0;
             document.getElementById("addResult").innerHTML = "";

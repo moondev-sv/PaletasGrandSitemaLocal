@@ -96,7 +96,7 @@ function imprimir($total,$cambio, $recibido, $fecha, $numeroTicket, $ventaActual
 	$printer->text("RECIBIDO: $" . $recibido . "\n");
 	$printer->text("CAMBIO: $" . $cambio . "\n");
 	$printer->text("SUBTOTAL: $" . $total . "\n");
-	$printer->text("IVA: $00.00\n");
+	//$printer->text("IVA: $00.00\n");
 	$printer->text("TOTAL: $" . $total . "\n");
 
 

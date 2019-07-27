@@ -150,17 +150,17 @@
 
                     <div class="form-check" style="margin: 5px;">
                         <label class="form-check-label" for="radio1">
-                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="4"
+                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="9"
                                 checked onchange="pago(this);">Efectivo
                         </label>
                     </div>
                     <div class="form-check" style="margin: 5px;">
                         <label class="form-check-label" for="radio2">
                             <input type="radio" class="form-check-input" id="radio2" name="optradio"
-                                value="5" onchange="pago(this);">Tarjeta de cr&eacute;dito
+                                value="10" onchange="pago(this);">Tarjeta de cr&eacute;dito
                         </label>
                     </div>
-                    <input type="hidden" id="fPago">
+                    <input type="hidden" id="fPago" value="9">
                     <center><input id="pagar" value='0' style="margin: 5px;" placeholder="Ingrese el pago recibido" type="text"
                             class="form-control form-control" onkeypress="validarPago(event);"></center>
                 </div>

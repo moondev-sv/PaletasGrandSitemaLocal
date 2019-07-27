@@ -103,7 +103,7 @@ elseif($accion=="Cambiar estado")
 		<div class="form-row text-center">
 			<div class="col-12 cuerpo">
 				
-				<table class="table table-striped">
+				<!--<table class="table table-striped">
 	  				<thead>
 	    			<tr>
 	      				<th scope="col">Codigo</th>
@@ -129,7 +129,7 @@ elseif($accion=="Cambiar estado")
 	    				<td>0.25</td>
 	    			</tr>
 					</tbody>
-				</table>
+				</table>-->
 			</div>
 		</div>
 	</div>

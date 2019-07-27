@@ -106,5 +106,64 @@ elseif($accion=="obtenerVentasTotalesRangoFechas")
 	}
 }
 
+/****************************************** */
+elseif($accion=="obtenerProductosTotales")
+{
+	require_once('Core/DB.php');
 
+	$conexion=new BaseDatos();
+
+	$fecha=$_POST['fecha'];
+
+	$resultado=$conexion->ejecutar("SELECT  * FROM `producto` INNER JOIN venta_producto ON producto.idproducto = venta_producto.id_producto INNER JOIN venta ON venta.idventa = venta_producto.id_venta INNER JOIN ticket ON venta.idventa = ticket.id_venta where Date(ticket.fecha)='$fecha' ");
+
+
+	if($resultado==0)
+		echo "<tr><td colspan='7'>No hay ventas de productos ese dia</td></tr>";
+	else
+	{
+		foreach ($resultado as $key) {
+			echo "<tr>
+			<td>".$key['idproducto']."</td>
+			<td>".$key['nom_producto']."</td>
+			<td>".$key['cant_producto']."</td>
+			<td>".$key['cant_x_producto']."</td>
+			<td>$".$key['precio_producto']."</td>
+			<td>$".$key['cant_producto']." x ".$key['precio_producto']."</td>
+			<td>$".$key['cant_x_producto']." x  ".$key['precio_producto']."</td></td>
+		</tr>";
+			
+		}
+	}
+}
+
+elseif($accion=="obtenerProcutosTotalesRangoFechas")
+{
+	require_once('Core/DB.php');
+
+	$conexion=new BaseDatos();
+
+	$fechaInicial=$_POST['fechaInicial'];
+	$fechaFinal=$_POST['fechaFinal'];
+
+	$resultado=$conexion->ejecutar("SELECT  * FROM `producto` INNER JOIN venta_producto ON producto.idproducto = venta_producto.id_producto INNER JOIN venta ON venta.idventa = venta_producto.id_venta INNER JOIN ticket ON venta.idventa = ticket.id_venta where Date(ticket.fecha)>='$fechaInicial' and Date(ticket.fecha)<='$fechaFinal' ");
+
+	if($resultado==0)
+		echo "<tr><td colspan='7'>No hay ventas en este rango de fechas</td></tr>";
+	else
+	{
+		foreach ($resultado as $key) {
+			echo "<tr>
+			<td>".$key['idproducto']."</td>
+			<td>".$key['nom_producto']."</td>
+			<td>".$key['cant_producto']."</td>
+			<td>".$key['cant_x_producto']."</td>
+			<td>$".$key['precio_producto']."</td>
+			<td>$".$key['cant_producto']*$key['precio_producto']."</td>
+			<td>$ ".$key['cant_x_producto']*$key['precio_producto']."</td></td>
+		</tr>";
+			
+		}
+	}
+}
 ?>

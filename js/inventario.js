@@ -129,6 +129,84 @@ function alternarFiltro()
 		lblFiltro.classList.add('d-none');
 }
 
+
+/***************************************************************** */
+
+
+
+function obtenerProductosVendidosInicial()
+{
+	var fecha = new Date();
+
+	var fechaInicial = document.getElementById('filtroDiaInicial2');
+	
+	var aux = Date.UTC(fecha.getFullYear() , fecha.getMonth(), fecha.getDate());
+
+	fechaInicial.valueAsNumber=aux;
+
+
+	$.ajax({
+	        type      : 'post',
+	        url       : 'inventario.php',
+	        data      : {accion: "obtenerProductosTotales", fecha : fecha.getFullYear() +"-"+ (fecha.getMonth()+1) 
+	        				+"-"+ fecha.getDate()},
+	        Async	  : false,
+	        success   : function(respuesta)
+	        {
+	        	var btblventasTotales = document.getElementById('btblventasTotales2');
+
+	        	btblventasTotales.innerHTML=respuesta;
+	        }
+	    });
+}
+
+function obtenerProductosTotales()
+{
+	if(document.getElementById('rangoHoras2').checked)
+	{
+		$.ajax({
+	        type      : 'post',
+	        url       : 'inventario.php',
+	        data      : {	accion: "obtenerProcutosTotalesRangoFechas", 
+	        				fechaInicial : document.getElementById('filtroDiaInicial2').value,
+	        				fechaFinal : document.getElementById('filtroDiaFinal2').value},
+	        Async	  : false,
+	        success   : function(respuesta)
+	        {
+	        	var btblventasTotales = document.getElementById('btblventasTotales2');
+
+	        	btblventasTotales.innerHTML=respuesta;
+	        }
+	    });
+	}
+	else
+	{
+		$.ajax({
+	        type      : 'post',
+	        url       : 'inventario.php',
+	        data      : {accion: "obtenerProductosTotales", 
+	        				fecha : document.getElementById('filtroDiaInicial2').value},
+	        Async	  : false,
+	        success   : function(respuesta)
+	        {
+	        	var btblventasTotales = document.getElementById('btblventasTotales2');
+
+	        	btblventasTotales.innerHTML=respuesta;
+	        }
+	    });
+	}
+}
+
+function alternarFiltro2()
+{
+	var lblFiltro = document.getElementById('filtroDiaFinalLabel2');
+
+	if(lblFiltro.classList.contains('d-none'))
+		lblFiltro.classList.remove('d-none');
+	else
+		lblFiltro.classList.add('d-none');
+}
+
 function asignarIdTicket(idTicket)
 {
 	document.getElementById('idTicketHidden').value=idTicket;

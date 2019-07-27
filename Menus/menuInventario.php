@@ -2,16 +2,97 @@
 	<div class="form-row text-center">
 		<div class="col-2 py-3 barra">
 			<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-				<button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<!--<button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Reportes
-				</button>
+				</button>-->
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-					<a class="dropdown-item" href="ventas.php">Productos Vendidos</a>
+					<a class="dropdown-item" data-toggle="modal" data-target="#reporteProductosVendidos">
+						<button class="btn btn-info"
+					 onclick="obtenerProductosVendidosInicial()">Productos Vendidos</button></a>
 					<button class="btn btn-info" data-toggle="modal" data-target="#reporteDeVentasModal"
 					data-mod="" onclick="obtenerVentasTotalesInicial()">Ventas Totales</button>
 				</div>
 			</div>
 		</div>
+
+
+
+
+	<!-- Modal para reportes de ventas totales -->
+	<div class="modal fade" id="reporteProductosVendidos" tabindex="-1" role="dialog" aria-labelledby="modal para reportes de ventas totales" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Reporte de productos vendidos</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+
+							<div class="Table InfoProduct" style="margin-top: 25px;">
+
+								<h1>Productos Vendidos</h1>
+
+								<label for="filtroDiaInicial2">
+									Filtro de fechas:&nbsp;
+									<input type="date" name="filtroDiaInicial2" id="filtroDiaInicial2" value="">
+								</label>
+
+								<label for="filtroDiaFinal2" id="filtroDiaFinalLabel2" class="d-none">&nbsp;-&nbsp;
+									<input type="date" name="filtroDiaFinal2" id="filtroDiaFinal2">
+								</label>
+
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="rangoHoras2">
+									<input type="checkbox" name="rangoHoras2" id="rangoHoras2" onclick="alternarFiltro2()">
+									Rango de fechas
+								</label>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<button onclick="obtenerProductosTotales()">Filtrar</button>
+
+
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Numero de Producto</th>
+											<th>Producto</th>
+											<th>Cantidad Producto</th>
+											<th>Cantidad de producto vendido</th>
+											<th>Precio Unitario</th>
+											<th>TOTAL producto STOCK</th>
+											<th>TOTAL producto VENDIDO</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody id='btblventasTotales2'>
+
+									</tbody>
+								</table>
+							</div>
+								
+							
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
 		<!-- Modal para reportes de ventas totales -->
 		<div class="modal fade" id="reporteDeVentasModal" tabindex="-1" role="dialog" aria-labelledby="modal para reportes de ventas totales" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
@@ -212,7 +293,7 @@
 		</div>
 	</div>
 	<div class="col-2 py-3 barra">
-		<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+		<!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 			<button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			Caja
 			</button>
@@ -220,7 +301,7 @@
 				<a class="dropdown-item" href="reportes.php">Reportes Z, X</a>
 				<a class="dropdown-item" href="admincaja.php">Operaciones caja</a>
 			</div>
-		</div>
+		</div>-->
 	</div>
 	<div class="col-3 py-3 barra">
 		<a href="index.php" class="btn btn-primary btn-lg">Listo</a>

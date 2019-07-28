@@ -24,6 +24,29 @@ elseif($accion=="obtenerProductosctivos")
 
 	echo json_encode($resultado);
 }
+elseif($accion=="obtenerProductos")
+{
+	require_once('Core/DB.php');
+
+	$conexion=new BaseDatos();
+
+	$resultado=$conexion->ejecutar("SELECT producto.*,categoria.nom_categoria FROM producto inner join categoria on categoria.idcategoria = producto.cat_producto where producto.estado=1 ORDER BY producto.nom_producto ASC");
+
+	if($resultado==0)
+		echo "<tr><td colspan='7'>No hay ventas este día</td></tr>";
+	else
+	{
+		foreach ($resultado as $key) {
+			echo "	<tr><td>".$key['nom_producto']."</td>
+					<td>".$key['nom_categoria']."</td>
+					<td>".$key['cant_producto']."</td>
+					<td>$".$key['precio_producto']."</td>";
+			
+			echo "<td><button class='btn btn-info' data-toggle='modal' data-target='#opcionesProductosModal'
+					onclick='colocarIdProducto(".$key['idproducto'].")'>Opciones</button></td></tr>";
+		}
+	}
+}
 elseif($accion=="obtenerVentasTotales")
 {
 	require_once('Core/DB.php');

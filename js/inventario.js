@@ -56,6 +56,41 @@ function obtenerProductosctivos()
     });
 }
 
+function obtenerProductos()
+{
+	$.ajax({
+        type      : 'post',
+        url       : 'inventario.php',
+        data      : {accion: "obtenerProductos"},
+        Async	  : false,
+        success   : function(respuesta)
+        {
+        	var btblProductos = document.getElementById('btblProductos');
+
+        	btblProductos.innerHTML=respuesta;
+        }
+    });
+}
+
+function colocarIdProducto(idProducto)
+{
+	document.getElementById('idProductoAumentar').value=idProducto;
+	document.getElementById('idProductoDisminuir').value=idProducto;
+	document.getElementById('idProductoEliminar').value=idProducto;
+}
+
+var eliminar=false;
+function eliminarProducto(e)
+{
+	if(!eliminar)
+	{
+		e.preventDefault();
+		document.getElementById('confirmacionEliminacion').innerHTML="¿Esta seguro que desea eliminar el producto? Esta acción no se puede deshacer";
+		eliminar=true;
+	}	
+}
+
+
 function obtenerVentasTotalesInicial()
 {
 	var fecha = new Date();

@@ -198,7 +198,8 @@ function reportX() {
         data: datos,
         success: function(Respuesta) {
             //console.log(Respuesta);    
-            document.getElementById('respuesta').innerHTML = Respuesta;
+            console.log(Respuesta);
+            alert('imprimiendo');
         },
         error: function(xhr) {
             alert("An error occured: " + xhr.status + " " + xhr.statusText);

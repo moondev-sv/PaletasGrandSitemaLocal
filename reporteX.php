@@ -27,7 +27,7 @@ $MaxTicketN++;
 //echo $MaxTicketN . "<br>";
 $fecha = $_POST['fecha'];
 $fechaFin = $_POST['fecha'];
-
+$productos;
 $total = 0;
 
 $connection = new BaseDatos();
@@ -89,8 +89,9 @@ if ($idventa != 0) {
 	}
 }
 
-imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo);
-
+if (count($productos) > 0) {
+	imprimir($productos, $fecha, $MaxTicketN, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo);
+}
 
 function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo)
 {
@@ -150,7 +151,7 @@ function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnu
 	/*Empezamos el reporte X*/
 	$printer->text("----------------------------------"."\n");
 	$printer->text("Reporte X\n");
-	$printer->text("X $fechaReporte - ". date("h:i:s") . "\n");
+	$printer->text("X $fecha - ". date("h:i:s") . "\n");
 	$printer->text("----------------------------------"."\n");
 
 

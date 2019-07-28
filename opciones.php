@@ -103,8 +103,10 @@ if(isset($_POST["guardar"])){
 	$valores[0] = "";
 	$nombre = $_POST['nombre'];
 	$valores[1] =$nombre;
+	$valores[2] = "0";
 	$campos[0] = "idcategoria";
 	$campos[1] = "nom_categoria";
+	$campos[2] = "estado";
 	
 
 	if ($BD->insert("categoria",$campos,$valores)==1)
@@ -120,8 +122,8 @@ if(isset($_POST["guardar"])){
 //--------------------------PARA ELIMINAR UNA CATEGORIA
 //----------------------------------------------------------
 if(($_POST["bandera"])=="eliminar"){
-	$id = $_POST['id'];
-	$BD->deleteGeneral("categoria","idcategoria",$_POST['id']);
+	$res = $BD->ejecutar("UPDATE categoria SET estado = 1 WHERE idcategoria = ".$_POST['id']);
+	//echo $res;
 	echo 1;
 	die();
 }

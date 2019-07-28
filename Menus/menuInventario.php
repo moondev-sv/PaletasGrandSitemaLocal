@@ -263,7 +263,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal para opciones de producto -->
         <div class="modal fade" id="opcionesProductosModal" tabindex="-1" role="dialog"
             aria-labelledby="Modal para opciones de producto" aria-hidden="true">
@@ -278,34 +277,26 @@
                     <div class="modal-body">
                         <div class="container">
 
-
                             <h3>Aumentar stock</h3>
                             <form action="" method="POST">
                                 <label for="cantidadAgregarProducto">Ingrese la cantidad de producto a aumentar:
                                     <input type="number" id="cantidadAgregarProducto" name="cantidadAgregarProducto"
                                         step="0.01" min=1>
                                 </label>
-
                                 <input type="hidden" id="idProductoAumentar" name="idProductoAumentar" value="">
                                 <input type="submit" class="btn btn-info" name="accion" value="Aumentar stock">
                             </form>
-
-
                             <h3>Disminuir stock</h3>
                             <form action="" method="POST">
                                 <label for="cantidadDisminuirProducto">Ingrese la cantidad de producto a disminuir:
                                     <input type="number" id="cantidadDisminuirProducto" name="cantidadDisminuirProducto"
                                         step="0.01" min=1>
                                 </label>
-
                                 <input type="hidden" id="idProductoDisminuir" name="idProductoDisminuir" value="">
                                 <input type="submit" class="btn btn-warning" name="accion" value="Disminuir stock">
                             </form>
-
-
                             <h3>Eliminar producto</h3>
                             <h5 id="confirmacionEliminacion"></h5>
-
                             <form action="" method="POST">
                                 <input type="hidden" id="idProductoEliminar" name="idProductoEliminar" value="">
                                 <button class="btn btn-danger" onclick="eliminarProducto(event)" name="accion"
@@ -319,7 +310,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-2 py-3 barra">
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle"
@@ -327,41 +317,42 @@
                     Caja
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-
                     <button class="btn btn-info dropdown-item" data-toggle="modal" data-target="#reporteX">Reporte
                         X</button>
-
 
                     <a class="dropdown-item" href="reportes.php">Reportes Z</a>
                 </div>
             </div>
         </div>
-
         <!-- Modal para reportes X-->
         <div class="modal fade" id="reporteX" tabindex="-1" role="dialog"
             aria-labelledby="modal para imprimir reportes X" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Imprimir Reporte X</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Si</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <input type="date" name="filtroDiaInicial2" id="fechaX" value="">
-                            <button onclick="reportX();">Imprimir</button>
+
+                            <div class="modal-body">
+                                <div class="container">
+                                    <input type="date" name="filtroDiaInicial2" id="fechaX" value="">
+                                    <button onclick="reportX();">Imprimir</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
-
-
         <div class="col-3 py-3 barra">
             <a href="index.php" class="btn btn-primary btn-lg">Listo</a>
         </div>

@@ -121,36 +121,46 @@ function obtenerVentasTotales()
 {
 	if(document.getElementById('rangoHoras').checked)
 	{
-		$.ajax({
-	        type      : 'post',
-	        url       : 'inventario.php',
-	        data      : {	accion: "obtenerVentasTotalesRangoFechas", 
-	        				fechaInicial : document.getElementById('filtroDiaInicial').value,
-	        				fechaFinal : document.getElementById('filtroDiaFinal').value},
-	        Async	  : false,
-	        success   : function(respuesta)
-	        {
-	        	var btblventasTotales = document.getElementById('btblventasTotales');
+		if(document.getElementById('filtroDiaInicial').valueAsDate==null || document.getElementById('filtroDiaFinal').valueAsDate==null)
+			alert("Ingrese fechas correctas en ambos campos");
+		else
+		{
+			$.ajax({
+		        type      : 'post',
+		        url       : 'inventario.php',
+		        data      : {	accion: "obtenerVentasTotalesRangoFechas", 
+		        				fechaInicial : document.getElementById('filtroDiaInicial').value,
+		        				fechaFinal : document.getElementById('filtroDiaFinal').value},
+		        Async	  : false,
+		        success   : function(respuesta)
+		        {
+		        	var btblventasTotales = document.getElementById('btblventasTotales');
 
-	        	btblventasTotales.innerHTML=respuesta;
-	        }
-	    });
+		        	btblventasTotales.innerHTML=respuesta;
+		        }
+		    });
+		}
 	}
 	else
 	{
-		$.ajax({
-	        type      : 'post',
-	        url       : 'inventario.php',
-	        data      : {accion: "obtenerVentasTotales", 
-	        				fecha : document.getElementById('filtroDiaInicial').value},
-	        Async	  : false,
-	        success   : function(respuesta)
-	        {
-	        	var btblventasTotales = document.getElementById('btblventasTotales');
+		if(document.getElementById('filtroDiaInicial').valueAsDate==null)
+			alert("Ingrese una fecha correcta");
+		else
+		{
+			$.ajax({
+		        type      : 'post',
+		        url       : 'inventario.php',
+		        data      : {accion: "obtenerVentasTotales", 
+		        				fecha : document.getElementById('filtroDiaInicial').value},
+		        Async	  : false,
+		        success   : function(respuesta)
+		        {
+		        	var btblventasTotales = document.getElementById('btblventasTotales');
 
-	        	btblventasTotales.innerHTML=respuesta;
-	        }
-	    });
+		        	btblventasTotales.innerHTML=respuesta;
+		        }
+	    	});
+		}
 	}
 }
 

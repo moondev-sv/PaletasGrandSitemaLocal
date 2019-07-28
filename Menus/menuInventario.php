@@ -139,9 +139,8 @@
 							<form action="" method="POST">
 								<label for="estadoTicket">Seleccione el estado del ticket:
 									<select name="estadoTicket" id="estadoTicket">
-										<option value="0">Activo</option>
-										<option value="1">Anulado</option>
-										<option value="2">Devolucion</option>
+										<option value="0">Anulado</option>
+										<option value="1">Activo</option>
 									</select>
 								</label>
 								<input type="hidden" name="idTicketHidden" id="idTicketHidden">
@@ -290,9 +289,8 @@
 							<form action="" method="POST">
 								<label for="estadoTicket">Seleccione el estado del ticket:
 									<select name="estadoTicket" id="estadoTicket">
-										<option value="0">Activo</option>
-										<option value="1">Anulado</option>
-										<option value="2">Devolucion</option>
+										<option value="0">Anulado</option>
+										<option value="1">Activo</option>
 									</select>
 								</label>
 								<input type="hidden" name="idTicketHidden" id="idTicketHidden">

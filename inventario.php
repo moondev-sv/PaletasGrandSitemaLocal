@@ -49,13 +49,10 @@ elseif($accion=="obtenerVentasTotales")
 			switch($key['estado'])
 			{
 				case 0:
-					echo "Activo";
-					break;
-				case 1:
 					echo "Anulado";
 					break;
-				case 2:
-					echo "Devolucion";
+				case 1:
+					echo "Activo";
 					break;
 			} 
 			echo "</td>";

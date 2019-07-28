@@ -26,7 +26,13 @@ $MaxTicketN++;
 
 //echo $MaxTicketN . "<br>";
 $fecha = $_POST['fecha'];
-$fechaFin = $_POST['fecha'];
+
+if (isset($_POST['reporteZ'])) {
+	$fechaFin = $_POST['fecha_fin'];
+} else {
+	$fechaFin = $_POST['fecha'];
+}
+
 $productos;
 $total = 0;
 
@@ -159,7 +165,7 @@ function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnu
 
 	$printer->text("Venta neta     $ $total\n");
 
-	$printer->text("Efectivo Gav   $ $totalEfectivo\n");
+	$printer->text("Efectivo Gav   $ $total\n");
 
 	$printer->text("Credito        $ 0.00\n");
 
@@ -197,7 +203,7 @@ function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnu
 	for ($i=0; $i < count($productos); $i++) { 
 		for ($j=0; $j < count($productos[$i]); $j++) {
 			$printer->text($productos[$i][$j]['nom_producto'] . "          " . $productos[$i][$j]['cant_x_producto'] . "\n");
-			$printer->text("                                           $" . ($productos[$i][$j]['total']) . "\n");
+			$printer->text("                                           $" . ($productos[$i][$j]['cant_x_producto'] * $productos[$i][$j]['precio_producto']) . "\n\n");
 		}
 	}
 

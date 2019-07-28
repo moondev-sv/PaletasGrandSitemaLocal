@@ -170,7 +170,6 @@
                     Categorias
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item"  onclick="modal_add_cat()">Agregar categoria</a>
                     <a class="dropdown-item" href="categoria.php">Ver categorias</a>
                 </div>
             </div>

@@ -9,7 +9,7 @@ if($accion=="obtenerCategorias")
 	$conexion=new BaseDatos();
 
 
-	$resultado=$conexion->ejecutar("SELECT * from categoria");
+	$resultado=$conexion->ejecutar("SELECT * from categoria WHERE estado = 0");
 
 	echo json_encode($resultado);
 }

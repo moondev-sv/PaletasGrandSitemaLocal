@@ -12,7 +12,7 @@ foreach ($datos as $key => $value) {
 		$html .="<tr>
 				<td>".$value['nom_categoria']."</td>
 				<td> <button class='btn btn-success' onclick='obtener(".$value['idcategoria'].")'>Editar</button> 
-				<button class='btn btn-danger' onclick='eliminar(".$value['idcategoria'].")'>Eliminar</button></td>
+				<button class='btn btn-danger' onclick='delCat(".$value['idcategoria'].")'>Eliminar</button></td>
 			</tr>";
 	}
 	else{
@@ -26,80 +26,102 @@ foreach ($datos as $key => $value) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Bootstrap CSS -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/GeneralStyle.css">
-	<script src="js/Jquery.js"></script>
-	<script src="js/popper.min.js"></script>
+    <script src="js/Jquery.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-	<title>*</title>
+    <title>*</title>
 </head>
 
 <body style="background: #34495E;">
 
-<script>
-		function eliminar(id){
-			$.post( "opciones.php", { id: id, bandera: "eliminar"})
-				.done(function( data ) {
-					if (data == 1){
-						alert("Hecho");
-						document.location.href='categoria.php';
-					}else{
-						alert("Error "+data);
-					}
-				});
-		}
-	function modal_add_cat(){
-    $("#modal_add_categorias").modal("show");
-	}
-	 function obtener(id){
-		$("#modal_edit_categorias").modal("show");
-			$.post( "opciones.php", { id: id, bandera: "obtener"})
-				.done(function( data ) {
-					$("#edit_cat").html(data);
-				});
-		}
-		function editar(id){
-			var nombre = $("#nombre_categoria").val();
-			$.post( "opciones.php", { id: id,nombre_categoria: nombre,bandera: "editar"})
-				.done(function( data ) {
-					$("#nombre_categoria").val("");
-					$("#edit_cat").html("");
-					document.location.href='categoria.php';
-				});
-		}
-	
-</script>
-	<!--estilos contenedores-->
-	<style type="text/css">
-		.encabezado{height: 80px; background: #34495E;}
-		.cuerpo{height: 280px; background:#F4F6F6;}
-	</style>
-	<div class="text-center">
-		<div class="col-12 encabezado bg-light ">
-			<?php
+
+    <script>
+    function delCat(id) {
+        $.post("opciones.php", {
+                id: id,
+                bandera: "eliminar"
+            })
+            .done(function(data) {
+                if (data == 1) {
+                    alert("Hecho");
+                    document.location.href = 'categoria.php';
+                } else {
+                    alert("Error " + data);
+                }
+            });
+    }
+
+    function showCat() {
+        $("#modal_add_categorias").modal("show");
+    }
+
+    function obtener(id) {
+        $("#modal_edit_categorias").modal("show");
+        $.post("opciones.php", {
+                id: id,
+                bandera: "obtener"
+            })
+            .done(function(data) {
+                $("#edit_cat").html(data);
+            });
+    }
+
+    function editar(id) {
+        var nombre = $("#nombre_categoria").val();
+        $.post("opciones.php", {
+                id: id,
+                nombre_categoria: nombre,
+                bandera: "editar"
+            })
+            .done(function(data) {
+                $("#nombre_categoria").val("");
+                $("#edit_cat").html("");
+                document.location.href = 'categoria.php';
+            });
+    }
+    </script>
+    <!--estilos contenedores-->
+    <style type="text/css">
+    .encabezado {
+        height: 80px;
+        background: #34495E;
+    }
+
+    .cuerpo {
+        height: 280px;
+        background: #F4F6F6;
+    }
+    </style>
+    <div class="text-center">
+        <div class="col-12 encabezado bg-light ">
+            <?php
 			include("Menus/menuInventario.php")
 			?>
-		</div>
-	</div>
-	
-	<div class="container">
-		<div class="bg-white">
-				<table class="table table-row table-bordered text-center">
-					<tr class="thead-dark">
-						<th>Nombre</th>
-						<th>Opcion</th>
-					</tr>
-					<?= $html ?>
-				</table>
-			</div>
-		
-	</div>
+        </div>
+    </div>
+    <button class='btn btn-success' style="margin: 15px;" onclick="showCat();">Agregar categoria</button>
+    <div class="container">
+        <div class="bg-white">
+            <table class="table table-row table-bordered text-center">
+                <tr class="thead-dark">
+                    <th>Nombre</th>
+                    <th>Opcion</th>
+                </tr>
+                <?= $html ?>
+            </table>
+        </div>
+
+    </div>
 
 
 
 </body>
+
 </html>

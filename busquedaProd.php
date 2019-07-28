@@ -41,8 +41,16 @@
 
         $connection = new BaseDatos();
         $tiket = $connection->ejecutar("select * from ticket where idticket = (select max(idticket) from ticket);"); 
+        $connection = new BaseDatos();
+        $tiketR = $connection->ejecutar("select * from reporte where idreporte = (select max(idreporte) from reporte);");
         $MaxTicketN = 0;
-        $MaxTicketN += $tiket[0]['numero_ticket'];
+
+        if ((double) $tiket[0]['numero_ticket'] > $tiketR[0]['numero_ticket']) {
+            $MaxTicketN += $tiket[0]['numero_ticket'];
+        } else {
+            $MaxTicketN += $tiketR[0]['numero_ticket'];
+        }
+        
         $MaxTicketN++;
 
         $connection = new BaseDatos();

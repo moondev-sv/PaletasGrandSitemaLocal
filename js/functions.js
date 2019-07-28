@@ -187,3 +187,21 @@ function validarPago(e) {
         }
     }
 }
+
+function reportX() {
+    var datos = {
+        "fecha": document.getElementById('fechaX').value
+    };
+    $.ajax({
+        url: 'reporteX.php',
+        type: 'POST',
+        data: datos,
+        success: function(Respuesta) {
+            //console.log(Respuesta);    
+            document.getElementById('respuesta').innerHTML = Respuesta;
+        },
+        error: function(xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    });
+}

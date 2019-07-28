@@ -1,4 +1,5 @@
 <?php
+require_once "Core/DB.php";
 require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
@@ -9,7 +10,89 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 	ticket de reporte X desde una impresora térmica
 */
 
-function imprimir($fechaReporte, $numeroTicket, $fechaFinReporte = false)
+$connection = new BaseDatos();
+$tiket = $connection->ejecutar("select * from ticket where idticket = (select max(idticket) from ticket);"); 
+$connection = new BaseDatos();
+$tiketR = $connection->ejecutar("select * from reporte where idreporte = (select max(idreporte) from reporte);");
+$MaxTicketN = 0;
+
+if ((double) $tiket[0]['numero_ticket'] > $tiketR[0]['numero_ticket']) {
+	$MaxTicketN += $tiket[0]['numero_ticket'];
+} else {
+	$MaxTicketN += $tiketR[0]['numero_ticket'];
+}
+
+$MaxTicketN++;
+
+//echo $MaxTicketN . "<br>";
+$fecha = $_POST['fecha'];
+$fechaFin = $_POST['fecha'];
+
+$total = 0;
+
+$connection = new BaseDatos();
+$idventa = $connection->ejecutar("select id_venta from ticket where fecha between '$fecha 00:00:00' AND '$fecha 23:59:59' AND estado = 1");
+
+if ($idventa != 0) {
+	for ($i=0; $i < count($idventa); $i++) { 
+		$connection = new BaseDatos();
+		$productos[] = $connection->ejecutar("select producto.nom_producto, venta_producto.cant_x_producto, producto.precio_producto, venta.total
+		from venta_producto 
+		inner join producto on producto.idproducto = venta_producto.id_producto
+		inner join venta on venta.idventa = venta_producto.id_venta where venta.idventa = " . $idventa[$i]['id_venta'] . ";");
+	
+		for ($j=0; $j < count($productos); $j++) { 
+			$total += (double) $productos[$i][$j]['total'];
+		}
+	}
+}
+
+$connection = new BaseDatos();
+$idventa = $connection->ejecutar("select id_venta from ticket where fecha between '$fecha 00:00:00' AND '$fecha 23:59:59' AND estado = 0");
+$totalAnulados = 0;
+$cantAnulados = 0;
+
+if ($idventa != 0) {
+	$cantAnulados = count($idventa);
+
+	for ($i=0; $i < count($idventa); $i++) { 
+		$connection = new BaseDatos();
+		$productosAnulados[] = $connection->ejecutar("select producto.nom_producto, venta_producto.cant_x_producto, producto.precio_producto, venta.total
+		from venta_producto 
+		inner join producto on producto.idproducto = venta_producto.id_producto
+		inner join venta on venta.idventa = venta_producto.id_venta where venta.idventa = " . $idventa[$i]['id_venta'] . ";");
+	
+		for ($j=0; $j < count($productosAnulados); $j++) { 
+			$totalAnulados += (double) $productosAnulados[$i][$j]['total'];
+		}
+	}
+}
+$connection = new BaseDatos();
+$idventa = $connection->ejecutar("select * from venta where id_formapago = 9");
+$totalEfectivo = 0;
+
+if ($idventa != 0) {
+	
+for ($i=0; $i < count($idventa); $i++) { 
+	$totalEfectivo += (double) $idventa[$i]['total'];
+}
+
+}
+
+$connection = new BaseDatos();
+$idventa = $connection->ejecutar("select * from venta where id_formapago = 10");
+$totaTarlCredito = 0;
+
+if ($idventa != 0) {
+	for ($i=0; $i < count($idventa); $i++) { 
+		$totaTarlCredito += (double) $idventa[$i]['total'];
+	}
+}
+
+imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo);
+
+
+function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo)
 {
 	$nombre_impresora = "LR2000"; 
 
@@ -67,95 +150,67 @@ function imprimir($fechaReporte, $numeroTicket, $fechaFinReporte = false)
 	/*Empezamos el reporte X*/
 	$printer->text("----------------------------------"."\n");
 	$printer->text("Reporte X\n");
-	$printer->text("X $rangoTiempo\n");
+	$printer->text("X $fechaReporte - ". date("h:i:s") . "\n");
 	$printer->text("----------------------------------"."\n");
 
 
-	$printer->text("Venta bruta    $numeroProductos\n");
-	$printer->text("               $ventaBruta\n");
+	$printer->text("Venta bruta    $  $total\n");
 
-	$printer->text("Venta neta  N° $numeroQueNoSeDeDondeSale\n");
-	$printer->text("               $ventaNeta\n");
+	$printer->text("Venta neta     $ $total\n");
 
-	$printer->text("Efectivo Gav   $efectivoGav\n");
+	$printer->text("Efectivo Gav   $ $totalEfectivo\n");
 
-	$printer->text("Credito        $sinAsignar\n");
+	$printer->text("Credito        $ 0.00\n");
 
-	$printer->text("Cheque         $sinAsignar\n");
+	$printer->text("Cheque         $ 0.00\n");
 
-	$printer->text("Tarj/credito   $sinAsignar\n");
+	$printer->text("Tarj/credito   $ $totaTarlCredito\n");
 
-	$printer->text("Tarj/debito    $sinAsignar\n");
+	$printer->text("Tarj/debito    $ 0.00\n");
 
-	$printer->text("Crid(3)        $sinAsignar\n");
+	$printer->text("Crid(3)        $ 0.00\n");
 
-	$printer->text("Crid(4)        $sinAsignar\n");
+	$printer->text("Crid(4)        $ 0.00\n");
 
 	$printer->text("----------------------------------\n");
-
-	$printer->text("Devolucion N°  $numeroDevolucion\n");
-	$printer->text("               $devolucion\n");
-
-	$printer->text("Cubiertos CT   $numeroCubiertos\n");
 	
-	$printer->text("Anula ticket N° $numeroAnulados\n");
-	$printer->text("               $anulados\n");
+	$printer->text("Anula ticket N° $cantAnulados\n");
+	$printer->text("               $totalAnulados\n");
 
 	$printer->text("----------------------------------\n");
 
 	$printer->text("TOTAL          $total\n");
-	$printer->text("TOTAL EXENTO   $totalExento\n");
+	$printer->text("TOTAL EXENTO   $total\n");
 	$printer->text("TOTAL Gravado  $total\n");
-	$printer->text("TOTAL NOSUJETO $total\n");
 
 	$printer->text("----------------------------------\n");
 
 	$printer->text("X funciones libres\n");
 
-	$printer->text("Numero que no se de donde sale\n");
-
-	$printer->text("Efectivo N°    $numeroEfectivo\n");
-	$printer->text("               $efectivo\n");
-
-	$printer->text("Corr     N°    $numeroCorr\n");
-	$printer->text("               $corr\n");
+	$printer->text("Efectivo N°    $ $total\n");
 
 	$printer->text("----------------------------------\n");
 
 	$printer->text("X productos\n");
-
-	$printer->text("Numero que no se de donde sale\n");
 	
-
-	for ($i=0; $i < 0; $i++)
-	{
-		//este for recorrera lo devuelto por la DB e imprimira los productos vendidos junto a su cantidad y precio
+	for ($i=0; $i < count($productos); $i++) { 
+		for ($j=0; $j < count($productos[$i]); $j++) {
+			$printer->text($productos[$i][$j]['nom_producto'] . "          " . $productos[$i][$j]['cant_x_producto'] . "\n");
+			$printer->text("                                           $" . ($productos[$i][$j]['total']) . "\n");
+		}
 	}
 
 	$printer->text("----------------------------------\n");
 
-	$printer->text("Total          $numeroTotal\n");
-	$printer->text("               $totalProcutosVendidos\n");
+	$printer->text("Total          $total\n");
 
 	$printer->text("----------------------------------\n");
 
-	$printer->text("X DEPTOS\n");
-	$printer->text("               $idDepto\n");
+	$printer->text("Venta bruta    $ $total\n");
 
-	$printer->text("----------------------------------\n");
+	$printer->text("Venta neta  N° $ $total\n");
 
-	$printer->text("X CAJA/EMPLEADO\n");
-	$printer->text("               $idEmpleado\n");
-
-	$printer->text("C03 ...........1\n");
-
-	$printer->text("Venta bruta    $numeroProductos\n");
-	$printer->text("               $ventaBruta\n");
-
-	$printer->text("Venta neta  N° $numeroQueNoSeDeDondeSale\n");
-	$printer->text("               $ventaNeta\n");
-
-	$printer->text("Efectivo Gav   $efectivoGav\n");
+	$printer->text("Efectivo Gav   $ $total\n");
 
 	/*
 		Podemos poner también un pie de página
@@ -188,9 +243,4 @@ function imprimir($fechaReporte, $numeroTicket, $fechaFinReporte = false)
 	*/
 	$printer->close();
 }
-
-
-echo "probando reporte X...";
 ?>
-<input type="date" name="filtroDiaInicial2" id="filtroDiaInicial2" value="">
-<button>Probando Reporte X</button>

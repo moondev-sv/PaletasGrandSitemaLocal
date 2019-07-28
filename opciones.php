@@ -108,6 +108,7 @@ elseif($accion=="Disminuir stock")
 		<script src="js/popper.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/inventario.js"></script>
+		<script src="js/functions.js"></script>
 	</head>
 	<body style="background: #34495E;" onload="obtenerProductos()">
 		<!--estilos contenedores-->

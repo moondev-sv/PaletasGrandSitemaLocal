@@ -21,6 +21,7 @@
 </head>
 
 <body onload="startSale();">
+
     <input type="hidden" id='puente'>
 
     <div class="MainContainer">
@@ -245,6 +246,11 @@
             </div>
         </div>
     </div>
+
+
+    
+   
+
 </body>
 </html>
 

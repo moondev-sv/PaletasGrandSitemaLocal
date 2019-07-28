@@ -9,98 +9,57 @@ $html = "";
 foreach ($datos as $key => $value) {
 	$html .="<tr>
 				<td>".$value['nom_categoria']."</td>
-				<td> <button onclick='obtener(".$value['idcategoria'].")'>Editar</button>,<button onclick='eliminar(".$value['idcategoria'].")'>Eliminar</button></td>
+				<td> <button class='btn btn-success' onclick='obtener(".$value['idcategoria'].")'>Editar</button> <button class='btn btn-danger' onclick='eliminar(".$value['idcategoria'].")'>Eliminar</button></td>
 			</tr>";
 }
-//----------------------------------------------------------
-//--------------------------PARA GUARDAR UNA NUEVA CATEGORIA
-//----------------------------------------------------------
-if(isset($_POST["guardar"])){
-	$nombre = $_POST['nombre'];
-	$valores[1] =$nombre;
 
-	if ($BD->insert("categoria",$campos,$valores)==1)
-	{
-		echo "<script type='text/javascript'>alert('categoria guardada')</script>";
-		echo "<script>document.location.href='categoria.php'</script>";
-	}
-	else{
-		echo "<script type='text/javascript'>alert('error')</script>";
-	}
-}
-//----------------------------------------------------------
-//--------------------------PARA ELIMINAR UNA CATEGORIA
-//----------------------------------------------------------
-if(($_POST["bandera"])=="eliminar"){
-	$id = $_POST['id'];
-	$BD->deleteGeneral("categoria","idcategoria",$id);
-	echo 1;
-}
-//----------------------------------------------------------
-//--------------------------PARA SELECCIONAR UN ITEM
-//----------------------------------------------------------
-if(($_POST["bandera"])=="obtener"){
-	$id = $_POST['id'];
-	$resultado = $BD->selectbyidGeneral("categoria","idcategoria",$id);
-	$html ="";
-	foreach ($resultado as $key => $value) {
-		$html .="
-		<input id='nombre_categoria' value='".$value['nom_categoria']."'></input>
-		<button onclick='editar(".$value['idcategoria'].")'>Actualizar</button>
-	";
-	}
-}
-//----------------------------------------------------------
-//--------------------------PARA ACTUALIZAR
-//----------------------------------------------------------
-if(($_POST["bandera"])=="editar"){
-	$id = $_POST['id'];
-	$nombre = $_POST['nombre_categoria'];
-	$respuesta = $BD->ejecutar("UPDATE categoria SET nom_categoria = '$nombre' WHERE id_categoria = $id");
-	echo $respuesta;
-}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/GeneralStyle.css">
+	<script src="js/Jquery.js"></script>
+	<script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 	<title>*</title>
 </head>
 
 <body style="background: #34495E;">
+
 <script>
+	function modal_add_cat(){
+    $("#modal_add_categorias").modal("show");
+	}
 	 function obtener(id){
-			$.post( "", { id: id, bandera: "obtener"})
+		$("#modal_edit_categorias").modal("show");
+			$.post( "opciones.php", { id: id, bandera: "obtener"})
 				.done(function( data ) {
-					$("#edit").html(data);
+					$("#edit_cat").html(data);
 				});
 		}
 		function editar(id){
 			var nombre = $("#nombre_categoria").val();
-			alert(nombre);
-			$.post( "", { id: id,nombre_categoria: nombre,bandera: "editar"})
+			$.post( "opciones.php", { id: id,nombre_categoria: nombre,bandera: "editar"})
 				.done(function( data ) {
-					alert(data);
 					$("#nombre_categoria").val("");
-					$("#edit").html("");
+					$("#edit_cat").html("");
+					document.location.href='categoria.php';
 				});
 		}
 		function eliminar(id){
-			$.post( "", { id: id, bandera: "eliminar"})
+			$.post( "opciones.php", { id: id, bandera: "eliminar"})
 				.done(function( data ) {
-					
 					if (data == 1){
 						alert("Hecho");
+						document.location.href='categoria.php';
 					}else{
-						alert("Error");
+						alert("Error"+data);
 					}
 				});
 		}
@@ -110,47 +69,20 @@ if(($_POST["bandera"])=="editar"){
 		.encabezado{height: 80px; background: #34495E;}
 		.cuerpo{height: 280px; background:#F4F6F6;}
 	</style>
-	<div class="">
-		<div class="col-12 encabezado">
+	<div class="text-center">
+		<div class="col-12 encabezado bg-light ">
+			<?php
+			include("Menus/menuInventario.php")
+			?>
 		</div>
 	</div>
-	<!--Barra de menu opciones-->
-	<div class="">
-	<?php
-		include("barra_herramientas.php")
-	?>
-	</div>
-
+	
 	<div class="container">
-		<div class="form-row">
-			<div class="col-3 cuerpo">
-			</div>
-
-			<div class="col-6 cuerpo background">
-				<div class="form">
-					<h3>Nueva Categoria</h3>
-				</div>
-				<form method="post">
-					<div class="form-group">
-						<label for="" ><h5>Nombre: </h5></label>
-							<input type="text" name="nombre" class="form-control" id="" placeholder="Digite nueva categoria">
-					</div>
-					<div class="form-group text-center">
-						<input type="submit" class="btn btn-success btn-lg" name="guardar" value="Finalizar">
-					</div>
-				</div>
-				</form>
-				<br>
-				
-		</div>
-		<div id="edit">
-
-		</div>
 		<div class="bg-white">
-				<table>
-					<tr>
-						<td>Nombre</td>
-						<td>Opcion</td>
+				<table class="table table-row table-bordered text-center">
+					<tr class="thead-dark">
+						<th>Nombre</th>
+						<th>Opcion</th>
 					</tr>
 					<?= $html ?>
 				</table>

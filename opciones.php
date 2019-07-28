@@ -1,6 +1,8 @@
 <?php
+error_reporting(0);
 @$accion=$_POST['accion'];
-
+include("Core/DB.php");
+$BD = new BaseDatos();
 if($accion=="Agregar producto")
 {
 	require_once('Core/DB.php');
@@ -93,7 +95,63 @@ elseif($accion=="Disminuir stock")
 		}
 	}
 }
+// ----------------------------------FUNCIONES DE CATEGORIA----------------------
+//----------------------------------------------------------
+//--------------------------PARA GUARDAR UNA NUEVA CATEGORIA
+//----------------------------------------------------------
+if(isset($_POST["guardar"])){
+	$valores[0] = "";
+	$nombre = $_POST['nombre'];
+	$valores[1] =$nombre;
+	$campos[0] = "idcategoria";
+	$campos[1] = "nom_categoria";
+	
 
+	if ($BD->insert("categoria",$campos,$valores)==1)
+	{
+		echo "<script type='text/javascript'>alert('categoria guardada')</script>";
+		echo "<script>document.location.href='categoria.php'</script>";
+	}
+	else{
+		echo "<script type='text/javascript'>alert('error')</script>";
+	}
+}
+//----------------------------------------------------------
+//--------------------------PARA ELIMINAR UNA CATEGORIA
+//----------------------------------------------------------
+if(($_POST["bandera"])=="eliminar"){
+	$id = $_POST['id'];
+	$BD->deleteGeneral("categoria","idcategoria",$_POST['id']);
+	echo 1;
+	die();
+}
+//----------------------------------------------------------
+//--------------------------PARA SELECCIONAR UN ITEM
+//----------------------------------------------------------
+if(($_POST["bandera"])=="obtener"){
+	$id = $_POST['id'];
+	$resultado = $BD->selectbyidGeneral("categoria","idcategoria",$id);
+	$html.="";
+	foreach ($resultado as $key => $value) {
+		$html .="
+		<input id='nombre_categoria' value='".$value['nom_categoria']."'>
+		<button onclick='editar(".$value['idcategoria'].")'>Actualizar</button>
+	";
+		# code...
+	}
+	
+	echo $html;
+	die();
+}
+//----------------------------------------------------------
+//--------------------------PARA ACTUALIZAR
+//----------------------------------------------------------
+if(($_POST["bandera"])=="editar"){
+	$id = $_POST['id'];
+	$nombre = $_POST['nombre_categoria'];
+	$respuesta = $BD->ejecutar("UPDATE categoria SET nom_categoria = '$nombre' WHERE idcategoria = $id");
+	echo 1;
+} 
 
 ?>
 <!DOCTYPE html>

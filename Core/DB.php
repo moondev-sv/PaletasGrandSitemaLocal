@@ -104,7 +104,7 @@ class BaseDatos {
 		else
 			return $sql->errorInfo();
 	}
-	public function selectbyidGeneral(){
+	public function selectbyidGeneral($tabla,$campo,$id){
 		$sql = $this->bd->prepare("SELECT * FROM $tabla WHERE $campo = $id");
 			if($sql->execute()){
 			$results = $sql->fetchAll(PDO::FETCH_ASSOC);

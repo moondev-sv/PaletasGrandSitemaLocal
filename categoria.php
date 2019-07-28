@@ -6,11 +6,19 @@ $campos[1] = "nom_categoria";
 $valores[0] = "";
 $datos = $BD->selectGeneral("categoria");
 $html = "";
+
 foreach ($datos as $key => $value) {
-	$html .="<tr>
+	if ($value['estado']==0) {
+		$html .="<tr>
 				<td>".$value['nom_categoria']."</td>
-				<td> <button class='btn btn-success' onclick='obtener(".$value['idcategoria'].")'>Editar</button> <button class='btn btn-danger' onclick='eliminar(".$value['idcategoria'].")'>Eliminar</button></td>
+				<td> <button class='btn btn-success' onclick='obtener(".$value['idcategoria'].")'>Editar</button> 
+				<button class='btn btn-danger' onclick='eliminar(".$value['idcategoria'].")'>Eliminar</button></td>
 			</tr>";
+	}
+	else{
+		$html.="";
+	}
+	
 }
 
 
@@ -33,6 +41,17 @@ foreach ($datos as $key => $value) {
 <body style="background: #34495E;">
 
 <script>
+		function eliminar(id){
+			$.post( "opciones.php", { id: id, bandera: "eliminar"})
+				.done(function( data ) {
+					if (data == 1){
+						alert("Hecho");
+						document.location.href='categoria.php';
+					}else{
+						alert("Error "+data);
+					}
+				});
+		}
 	function modal_add_cat(){
     $("#modal_add_categorias").modal("show");
 	}
@@ -52,17 +71,7 @@ foreach ($datos as $key => $value) {
 					document.location.href='categoria.php';
 				});
 		}
-		function eliminar(id){
-			$.post( "opciones.php", { id: id, bandera: "eliminar"})
-				.done(function( data ) {
-					if (data == 1){
-						alert("Hecho");
-						document.location.href='categoria.php';
-					}else{
-						alert("Error"+data);
-					}
-				});
-		}
+	
 </script>
 	<!--estilos contenedores-->
 	<style type="text/css">

@@ -11,10 +11,9 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 	ticket de reporte X desde una impresora térmica
 */
 
-function imprimir($total,$cambio, $recibido, $fecha, $numeroTicket, $ventaActual)
+function imprimir($fechaReporte, $numeroTicket, $fechaFinReporte = false)
 {
 	$nombre_impresora = "LR2000"; 
-
 
 	$connector = new WindowsPrintConnector($nombre_impresora);
 	$printer = new Printer($connector);
@@ -192,4 +191,8 @@ function imprimir($total,$cambio, $recibido, $fecha, $numeroTicket, $ventaActual
 	$printer->close();
 }
 
+
+echo "probando reporte X...";
 ?>
+<input type="date" name="filtroDiaInicial2" id="filtroDiaInicial2" value="">
+<button>Probando Reporte X</button>

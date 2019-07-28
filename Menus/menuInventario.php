@@ -1,3 +1,4 @@
+<script src="js/inventario.js"></script>
 <div class="container">
     <div class="form-row text-center">
         <div class="col-2 py-3 barra">
@@ -35,19 +36,19 @@
                                 <h1>Productos Vendidos</h1>
                                 <label for="filtroDiaInicial2">
                                     Filtro de fechas:&nbsp;
-                                    <input type="date" name="filtroDiaInicial2" id="filtroDiaInicial2" value="">
+                                    <input type="date" name="filtroDiaInicial2" id="filtroDiaInicial2" value="" class="form-control">
                                 </label>
                                 <label for="filtroDiaFinal2" id="filtroDiaFinalLabel2" class="d-none">&nbsp;-&nbsp;
-                                    <input type="date" name="filtroDiaFinal2" id="filtroDiaFinal2">
+                                    <input type="date" name="filtroDiaFinal2" id="filtroDiaFinal2" class="form-control">
                                 </label>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <label for="rangoHoras2">
                                     <input type="checkbox" name="rangoHoras2" id="rangoHoras2"
-                                        onclick="alternarFiltro2()">
+                                        onclick="alternarFiltro2()" class="form-check-input">
                                     Rango de fechas
                                 </label>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button onclick="obtenerProductosTotales()">Filtrar</button>
+                                <button onclick="obtenerProductosTotales()" class="btn btn-success">Filtrar</button>
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -92,18 +93,18 @@
                                 <h1>Ventas totales</h1>
                                 <label for="filtroDiaInicial">
                                     Filtro de fechas:&nbsp;
-                                    <input type="date" name="filtroDiaInicial" id="filtroDiaInicial" value="">
+                                    <input type="date" name="filtroDiaInicial" id="filtroDiaInicial" value="" class="form-control">
                                 </label>
                                 <label for="filtroDiaFinal" id="filtroDiaFinalLabel" class="d-none">&nbsp;-&nbsp;
-                                    <input type="date" name="filtroDiaFinal" id="filtroDiaFinal">
+                                    <input type="date" name="filtroDiaFinal" id="filtroDiaFinal" class="form-control">
                                 </label>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <label for="rangoHoras">
-                                    <input type="checkbox" name="rangoHoras" id="rangoHoras" onclick="alternarFiltro()">
+                                    <input type="checkbox" name="rangoHoras" id="rangoHoras" onclick="alternarFiltro()" class="form-check-input">
                                     Rango de fechas
                                 </label>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button onclick="obtenerVentasTotales()">Filtrar</button>
+                                <button onclick="obtenerVentasTotales()" class="btn btn-success">Filtrar</button>
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -201,20 +202,20 @@
                         <div class="modal-body">
                             <div class="container">
                                 <div class="form-group row">
-                                    <label for="categorias">
+                                    <label for="categorias" class="col-6">
                                         Seleccione la categoria:
-                                        <select id="categorias" name="categorias">
+                                        <select id="categorias" name="categorias" class="form-control">
                                             <!--Se cargan automaticamente-->
                                         </select>
                                     </label>
-                                    <label for="nombre">Nombre:
-                                        <input type="text" id="nombre" name="nombre" required>
+                                    <label for="nombre" class="col-6">Nombre:
+                                        <input type="text" id="nombre" name="nombre" required class="form-control">
                                     </label>
-                                    <label for="precio">Precio:
-                                        <input type="number" min=0 step=0.01 name="precio" id="precio">
+                                    <label for="precio" class="col-6">Precio:
+                                        <input type="number" min=0 step=0.01 name="precio" id="precio" class="form-control">
                                     </label>
-                                    <label for="cantidad">Cantidad:
-                                        <input type="number" min=0 step=0.01 name="cantidad" id="cantidad">
+                                    <label for="cantidad" class="col-6">Cantidad:
+                                        <input type="number" min=0 step=0.01 name="cantidad" id="cantidad" class="form-control">
                                     </label>
                                 </div>
                             </div>
@@ -318,8 +319,9 @@
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <button class="btn btn-info dropdown-item" data-toggle="modal" data-target="#reporteX">Reporte
                         X</button>
-
-                    <a class="dropdown-item" href="reportes.php">Reportes Z</a>
+                        <button class="btn btn-info dropdown-item" data-toggle="modal" data-target="#reporteZ" disabled>Reporte
+                        Z</button>
+                    
                 </div>
             </div>
         </div>
@@ -376,8 +378,8 @@
 
                             <div class="modal-body">
                                 <div class="container">
-                                    <input type="date" name="filtroDiaInicial2" id="fechaX" value="">
-                                    <button onclick="reportX();">Imprimir</button>
+                                    <input type="date" name="filtroDiaInicial2" id="fechaX" value="" class="form-control">
+                                    <button onclick="reportX();" class="btn btn-info">Imprimir</button>
                                 </div>
                             </div>
 

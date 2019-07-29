@@ -206,3 +206,25 @@ function reportX() {
         }
     });
 }
+
+function reportZ() {
+    var datos = {
+        "fecha": document.getElementById('fechaZ').value,
+        "fecha_fin": document.getElementById('fechaFinZ').value,
+        "reporteZ": true
+    };
+
+    $.ajax({
+        url: 'reporteZ.php',
+        type: 'POST',
+        data: datos,
+        success: function(Respuesta) {
+            //console.log(Respuesta);    
+            console.log(Respuesta);
+            alert('imprimiendo');
+        },
+        error: function(xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        }
+    });
+}

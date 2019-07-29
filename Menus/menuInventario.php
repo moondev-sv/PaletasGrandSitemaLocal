@@ -36,7 +36,8 @@
                                 <h1>Productos Vendidos</h1>
                                 <label for="filtroDiaInicial2">
                                     Filtro de fechas:&nbsp;
-                                    <input type="date" name="filtroDiaInicial2" id="filtroDiaInicial2" value="" class="form-control">
+                                    <input type="date" name="filtroDiaInicial2" id="filtroDiaInicial2" value=""
+                                        class="form-control">
                                 </label>
                                 <label for="filtroDiaFinal2" id="filtroDiaFinalLabel2" class="d-none">&nbsp;-&nbsp;
                                     <input type="date" name="filtroDiaFinal2" id="filtroDiaFinal2" class="form-control">
@@ -93,14 +94,16 @@
                                 <h1>Ventas totales</h1>
                                 <label for="filtroDiaInicial">
                                     Filtro de fechas:&nbsp;
-                                    <input type="date" name="filtroDiaInicial" id="filtroDiaInicial" value="" class="form-control">
+                                    <input type="date" name="filtroDiaInicial" id="filtroDiaInicial" value=""
+                                        class="form-control">
                                 </label>
                                 <label for="filtroDiaFinal" id="filtroDiaFinalLabel" class="d-none">&nbsp;-&nbsp;
                                     <input type="date" name="filtroDiaFinal" id="filtroDiaFinal" class="form-control">
                                 </label>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <label for="rangoHoras">
-                                    <input type="checkbox" name="rangoHoras" id="rangoHoras" onclick="alternarFiltro()" class="form-check-input">
+                                    <input type="checkbox" name="rangoHoras" id="rangoHoras" onclick="alternarFiltro()"
+                                        class="form-check-input">
                                     Rango de fechas
                                 </label>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -211,10 +214,12 @@
                                         <input type="text" id="nombre" name="nombre" required class="form-control">
                                     </label>
                                     <label for="precio" class="col-6">Precio:
-                                        <input type="number" min=0 step=0.01 name="precio" id="precio" class="form-control">
+                                        <input type="number" min=0 step=0.01 name="precio" id="precio"
+                                            class="form-control">
                                     </label>
                                     <label for="cantidad" class="col-6">Cantidad:
-                                        <input type="number" min=0 step=0.01 name="cantidad" id="cantidad" class="form-control">
+                                        <input type="number" min=0 step=0.01 name="cantidad" id="cantidad"
+                                            class="form-control">
                                     </label>
                                 </div>
                             </div>
@@ -318,14 +323,14 @@
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <button class="btn btn-info dropdown-item" data-toggle="modal" data-target="#reporteX">Reporte
                         X</button>
-                        <button class="btn btn-info dropdown-item" data-toggle="modal" data-target="#reporteZ" disabled>Reporte
+                    <button class="btn btn-info dropdown-item" data-toggle="modal" data-target="#reporteZ">Reporte
                         Z</button>
-                    
+
                 </div>
             </div>
         </div>
-          <!-- Modal para reportes agregar categoria-->
-          <div class="modal fade" id="modal_add_categorias" tabindex="-1" role="dialog"
+        <!-- Modal para reportes agregar categoria-->
+        <div class="modal fade" id="modal_add_categorias" tabindex="-1" role="dialog"
             aria-labelledby="modal para imprimir reportes X" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -343,24 +348,27 @@
                                     <div class="form">
                                         <h3>Nueva Categoria</h3>
                                     </div>
-                                    <form method="post" action="opciones.php" name="form_categorias" id="form_categorias">
+                                    <form method="post" action="opciones.php" name="form_categorias"
+                                        id="form_categorias">
                                         <div class="form-group">
-                                                <input type="text" name="nombre" class="form-control" id="" placeholder="Digite nueva categoria">
+                                            <input type="text" name="nombre" class="form-control" id=""
+                                                placeholder="Digite nueva categoria">
                                         </div>
-                                    </div>
-                                    </form>
-                                
+                                </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                    <input type="submit" class="btn btn-success" name="guardar" value="Finalizar" form="form_categorias">
+                        <input type="submit" class="btn btn-success" name="guardar" value="Finalizar"
+                            form="form_categorias">
                     </div>
                 </div>
             </div>
         </div>
-       
- 
+
+
         <!-- Modal para reportes X-->
         <div class="modal fade" id="reporteX" tabindex="-1" role="dialog"
             aria-labelledby="modal para imprimir reportes X" aria-hidden="true">
@@ -377,8 +385,43 @@
 
                             <div class="modal-body">
                                 <div class="container">
-                                    <input type="date" name="filtroDiaInicial2" id="fechaX" value="" class="form-control">
+                                    <input type="date" name="filtroDiaInicial2" id="fechaX" value=""
+                                        class="form-control">
+                        <br>
                                     <button onclick="reportX();" class="btn btn-info">Imprimir</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Modal para reportes Z-->
+        <div class="modal fade" id="reporteZ" tabindex="-1" role="dialog"
+            aria-labelledby="modal para imprimir reportes Z" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Imprimir Z</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="modal-body">
+                                <div class="container">
+                                    Fecha Inicio<input type="date" name="filtroDiaInicial2" id="fechaZ" value=""
+                                        class="form-control">
+                                        <br>
+                                    Fecha Fin<input type="date" name="filtroDiaInicial2" id="fechaFinZ" value=""
+                                        class="form-control">
+                                        <br>
+                                    <button onclick="reportZ();" class="btn btn-info">Imprimir</button>
                                 </div>
                             </div>
 
@@ -393,9 +436,8 @@
         <div class="col-3 py-3 barra">
             <a href="index.php" class="btn btn-primary btn-lg">Listo</a>
         </div>
-         <!-- Modal para reportes editar categoria-->
-         <div class="modal fade" id="modal_edit_categorias" tabindex="-1" role="dialog"
-             aria-hidden="true">
+        <!-- Modal para reportes editar categoria-->
+        <div class="modal fade" id="modal_edit_categorias" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -412,17 +454,17 @@
                                     <div class="form">
                                         <h3>Edita la Categoria</h3>
                                     </div>
-                                   <div id="edit_cat">
+                                    <div id="edit_cat">
 
-                                   </div>
-                                
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    
                 </div>
             </div>
-            </div>
-        
+
+        </div>
     </div>
-</div>

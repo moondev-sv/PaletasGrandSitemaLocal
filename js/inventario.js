@@ -123,6 +123,8 @@ function obtenerVentasTotales()
 	{
 		if(document.getElementById('filtroDiaInicial').valueAsDate==null || document.getElementById('filtroDiaFinal').valueAsDate==null)
 			alert("Ingrese fechas correctas en ambos campos");
+		else if(document.getElementById('filtroDiaInicial').valueAsDate > document.getElementById('filtroDiaFinal').valueAsDate)
+			alert("La fecha inicial no puede ser mayor que la final");
 		else
 		{
 			$.ajax({
@@ -209,36 +211,50 @@ function obtenerProductosTotales()
 {
 	if(document.getElementById('rangoHoras2').checked)
 	{
-		$.ajax({
-	        type      : 'post',
-	        url       : 'inventario.php',
-	        data      : {	accion: "obtenerProcutosTotalesRangoFechas", 
-	        				fechaInicial : document.getElementById('filtroDiaInicial2').value,
-	        				fechaFinal : document.getElementById('filtroDiaFinal2').value},
-	        Async	  : false,
-	        success   : function(respuesta)
-	        {
-	        	var btblventasTotales = document.getElementById('btblventasTotales2');
+		if(document.getElementById('filtroDiaInicial2').valueAsDate==null || document.getElementById('filtroDiaFinal2').valueAsDate==null)
+			alert("Ingrese fechas correctas en ambos campos");
+		else if(document.getElementById('filtroDiaInicial2').valueAsDate > document.getElementById('filtroDiaFinal2').valueAsDate)
+			alert("La fecha inicial no puede ser mayor que la final");
+		else
+		{
+			$.ajax({
+		        type      : 'post',
+		        url       : 'inventario.php',
+		        data      : {	accion: "obtenerProcutosTotalesRangoFechas", 
+		        				fechaInicial : document.getElementById('filtroDiaInicial2').value,
+		        				fechaFinal : document.getElementById('filtroDiaFinal2').value},
+		        Async	  : false,
+		        success   : function(respuesta)
+		        {
+		        	var btblventasTotales = document.getElementById('btblventasTotales2');
 
-	        	btblventasTotales.innerHTML=respuesta;
-	        }
-	    });
+		        	btblventasTotales.innerHTML=respuesta;
+		        }
+		    });
+		}
+		
 	}
 	else
 	{
-		$.ajax({
-	        type      : 'post',
-	        url       : 'inventario.php',
-	        data      : {accion: "obtenerProductosTotales", 
-	        				fecha : document.getElementById('filtroDiaInicial2').value},
-	        Async	  : false,
-	        success   : function(respuesta)
-	        {
-	        	var btblventasTotales = document.getElementById('btblventasTotales2');
+		if(document.getElementById('filtroDiaInicial2').valueAsDate==null)
+			alert("Ingrese una fecha correcta");
+		else
+		{
+			$.ajax({
+		        type      : 'post',
+		        url       : 'inventario.php',
+		        data      : {accion: "obtenerProductosTotales", 
+		        				fecha : document.getElementById('filtroDiaInicial2').value},
+		        Async	  : false,
+		        success   : function(respuesta)
+		        {
+		        	var btblventasTotales = document.getElementById('btblventasTotales2');
 
-	        	btblventasTotales.innerHTML=respuesta;
-	        }
-	    });
+		        	btblventasTotales.innerHTML=respuesta;
+		        }
+		    });
+		}
+		
 	}
 }
 

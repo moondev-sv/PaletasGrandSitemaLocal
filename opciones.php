@@ -14,11 +14,19 @@ if($accion=="Agregar producto")
 	$resultado=$conexion->ejecutar("INSERT into producto values (null, '$nombre', $idCategoria,$precio,$cantidad, 1)");
 	if(gettype($resultado)=="string")
 	{
-		echo "Error: $resultado";
+		?>
+		<div class="alert alert-danger" role="alert">
+		  <?php echo "Error: $resultado";?>
+		</div>
+		<?php
 	}
 	else
 	{
-		echo "Se registro el producto";
+		?>
+		<div class="alert alert-success" role="alert">
+		  <?php echo "Se registro el producto"; ?>
+		</div>
+		<?php
 	}
 }
 elseif($accion=="Eliminar producto")
@@ -29,15 +37,31 @@ elseif($accion=="Eliminar producto")
 	$resultado=$conexion->ejecutar("UPDATE producto set estado=0 where idproducto=$idProducto");
 	if(gettype($resultado)=="string")
 	{
-		echo "Error: $resultado";
+		?>
+		<div class="alert alert-danger" role="alert">
+		  <?php echo "Error: $resultado";?>
+		</div>
+		<?php
 	}
 	elseif($resultado==0)
 	{
-		echo "No puede eliminar un porducto que aun esta en inventario. Reduzca su cantidad a cero";
+		?>
+		<div class="alert alert-warning" role="alert">
+		  <?php echo "No puede eliminar un porducto que aun esta en inventario. Reduzca su cantidad a cero";?>
+		</div>
+		<?php
+
+		
 	}
 	else
 	{
-		echo "Se elimino el producto";
+		?>
+		<div class="alert alert-success" role="alert">
+		  <?php echo "Se elimino el producto"; ?>
+		</div>
+		<?php
+
+		
 	}
 }
 elseif($accion=="Cambiar estado")
@@ -49,11 +73,21 @@ elseif($accion=="Cambiar estado")
 	$resultado=$conexion->ejecutar("UPDATE ticket set estado=$estadoTicket where idticket=$idTicket");
 	if(gettype($resultado)=="string")
 	{
-		echo "Error: $resultado";
+		?>
+		<div class="alert alert-danger" role="alert">
+		  <?php echo "Error: $resultado"; ?>
+		</div>
+		<?php
 	}
 	else
 	{
-		echo "Se cambio el estado";
+		?>
+		<div class="alert alert-success" role="alert">
+		  <?php echo "Se cambio el estado"; ?>
+		</div>
+		<?php
+
+		
 	}
 }
 elseif($accion=="Aumentar stock")
@@ -65,11 +99,21 @@ elseif($accion=="Aumentar stock")
 	$resultado=$conexion->ejecutar("UPDATE producto set cant_producto=cant_producto+$cantidad where idproducto=$idProducto");
 	if(gettype($resultado)=="string")
 	{
-		echo "Error: $resultado";
+		?>
+		<div class="alert alert-danger" role="alert">
+		  <?php echo "Error: $resultado"; ?>
+		</div>
+		<?php
+
+		
 	}
 	else
 	{
-		echo "Se aumento el stock";
+		?>
+		<div class="alert alert-success" role="alert">
+		  <?php echo "Se aumento el stock"; ?>
+		</div>
+		<?php
 	}
 }
 elseif($accion=="Disminuir stock")
@@ -81,17 +125,33 @@ elseif($accion=="Disminuir stock")
 	$resultado=$conexion->ejecutar("SELECT cant_producto from producto where idproducto=$idProducto");
 
 	if($resultado[0]['cant_producto']<$cantidad)
-		echo "No puede eliminar mnas producto del existente";
+	{
+		?>
+		<div class="alert alert-warning" role="alert">
+		  <?php echo "No puede eliminar mas producto del existente"; ?>
+		</div>
+		<?php
+	}
 	else
 	{
 		$resultado=$conexion->ejecutar("UPDATE producto set cant_producto=cant_producto-$cantidad where idproducto=$idProducto");
 		if(gettype($resultado)=="string")
 		{
-			echo "Error: $resultado";
+			?>
+			<div class="alert alert-danger" role="alert">
+			  <?php echo "Error: $resultado"; ?>
+			</div>
+			<?php
+			
 		}
 		else
 		{
-			echo "Se disminuyo el stock";
+			?>
+			<div class="alert alert-success" role="alert">
+			  <?php echo "Se disminuyo el stock"; ?>
+			</div>
+			<?php
+			
 		}
 	}
 }
@@ -136,7 +196,7 @@ if(($_POST["bandera"])=="obtener"){
 	$html.="";
 	foreach ($resultado as $key => $value) {
 		$html .="
-		<input id='nombre_categoria' value='".$value['nom_categoria']."'>
+		<input id='nombre_categoria' value='".$value['nom_categoria']."' required>
 		<button onclick='editar(".$value['idcategoria'].")'>Actualizar</button>
 	";
 		# code...

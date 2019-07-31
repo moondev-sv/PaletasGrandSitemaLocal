@@ -81,17 +81,25 @@ if(($_POST["bandera"])=="eliminar"){
     }
 
     function editar(id) {
-        var nombre = $("#nombre_categoria").val();
-        $.post("opciones.php", {
-                id: id,
-                nombre_categoria: nombre,
-                bandera: "editar"
-            })
-            .done(function(data) {
-                $("#nombre_categoria").val("");
-                $("#edit_cat").html("");
-                document.location.href = 'categoria.php';
-            });
+        if($("#nombre_categoria").val() == "")
+            alert("introduzca un nombre por favor");
+        else
+        {
+            var nombre = $("#nombre_categoria").val();
+            $.post("opciones.php", {
+                    id: id,
+                    nombre_categoria: nombre,
+                    bandera: "editar"
+                })
+                .done(function(data) {
+                    $("#nombre_categoria").val("");
+                    $("#edit_cat").html("");
+                    alert("se actualizo la categoria");
+                    document.location.href = 'categoria.php';
+                });
+        }
+
+        
     }
     </script>
     <!--estilos contenedores-->

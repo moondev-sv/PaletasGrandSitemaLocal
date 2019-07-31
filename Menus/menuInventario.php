@@ -215,11 +215,11 @@
                                     </label>
                                     <label for="precio" class="col-6">Precio:
                                         <input type="number" min=0 step=0.01 name="precio" id="precio"
-                                            class="form-control">
+                                            class="form-control" required>
                                     </label>
                                     <label for="cantidad" class="col-6">Cantidad:
                                         <input type="number" min=0 step=0.01 name="cantidad" id="cantidad"
-                                            class="form-control">
+                                            class="form-control" required>
                                     </label>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@
                             <form action="" method="POST">
                                 <label for="cantidadAgregarProducto">Ingrese la cantidad de producto a aumentar:
                                     <input type="number" id="cantidadAgregarProducto" name="cantidadAgregarProducto"
-                                        step="0.01" min=1>
+                                        step="0.01" min=1 required>
                                 </label>
                                 <input type="hidden" id="idProductoAumentar" name="idProductoAumentar" value="">
                                 <input type="submit" class="btn btn-info" name="accion" value="Aumentar stock">
@@ -294,7 +294,7 @@
                             <form action="" method="POST">
                                 <label for="cantidadDisminuirProducto">Ingrese la cantidad de producto a disminuir:
                                     <input type="number" id="cantidadDisminuirProducto" name="cantidadDisminuirProducto"
-                                        step="0.01" min=1>
+                                        step="0.01" min=1 required>
                                 </label>
                                 <input type="hidden" id="idProductoDisminuir" name="idProductoDisminuir" value="">
                                 <input type="submit" class="btn btn-warning" name="accion" value="Disminuir stock">
@@ -314,6 +314,8 @@
                 </div>
             </div>
         </div>
+
+
         <div class="col-2 py-3 barra">
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <button id="btngroupdrop1" type="button" class="btn btn-secondary dropdown-toggle"
@@ -329,6 +331,8 @@
                 </div>
             </div>
         </div>
+
+
         <!-- Modal para reportes agregar categoria-->
         <div class="modal fade" id="modal_add_categorias" tabindex="-1" role="dialog"
             aria-labelledby="modal para imprimir reportes X" aria-hidden="true">
@@ -399,7 +403,10 @@
                     </div>
                 </div>
             </div>
-        </div><!-- Modal para reportes Z-->
+        </div>
+
+
+        <!-- Modal para reportes Z-->
         <div class="modal fade" id="reporteZ" tabindex="-1" role="dialog"
             aria-labelledby="modal para imprimir reportes Z" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -433,9 +440,13 @@
                 </div>
             </div>
         </div>
+
+
         <div class="col-3 py-3 barra">
             <a href="index.php" class="btn btn-primary btn-lg">Listo</a>
         </div>
+
+
         <!-- Modal para reportes editar categoria-->
         <div class="modal fade" id="modal_edit_categorias" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">

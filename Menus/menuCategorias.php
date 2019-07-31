@@ -41,7 +41,7 @@
                                         id="form_categorias">
                                         <div class="form-group">
                                             <input type="text" name="nombre" class="form-control" id=""
-                                                placeholder="Digite nueva categoria">
+                                                placeholder="Digite nueva categoria" required>
                                         </div>
                                 </div>
                                 </form>

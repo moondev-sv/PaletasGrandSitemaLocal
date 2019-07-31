@@ -189,42 +189,55 @@ function validarPago(e) {
 }
 
 function reportX() {
-    var datos = {
-        "fecha": document.getElementById('fechaX').value
-    };
-    $.ajax({
-        url: 'reporteX.php',
-        type: 'POST',
-        data: datos,
-        success: function(Respuesta) {
-            //console.log(Respuesta);    
-            console.log(Respuesta);
-            alert('imprimiendo');
-        },
-        error: function(xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
-        }
-    });
+
+    if(document.getElementById('fechaX').valueAsDate==null)
+        alert("Ingrese una fecha valida");
+    else
+    {
+        var datos = {
+            "fecha": document.getElementById('fechaX').value
+        };
+        $.ajax({
+            url: 'reporteX.php',
+            type: 'POST',
+            data: datos,
+            success: function(Respuesta) {
+                //console.log(Respuesta);    
+                console.log(Respuesta);
+                alert('imprimiendo');
+            },
+            error: function(xhr) {
+                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            }
+        });
+    }
 }
 
 function reportZ() {
-    var datos = {
-        "fecha": document.getElementById('fechaZ').value,
-        "fecha_fin": document.getElementById('fechaFinZ').value,
-        "reporteZ": true
-    };
+    if(document.getElementById('fechaZ').valueAsDate==null || document.getElementById('fechaFinZ').valueAsDate==null)
+        alert("Ingrese un rango de fechas validas");
+    else if(document.getElementById('fechaZ').valueAsDate > document.getElementById('fechaFinZ').valueAsDate)
+        alert("La fecha inicial no puede ser mayor que la final");
+    else
+    {
+        var datos = {
+            "fecha": document.getElementById('fechaZ').value,
+            "fecha_fin": document.getElementById('fechaFinZ').value,
+            "reporteZ": true
+        };
 
-    $.ajax({
-        url: 'reporteZ.php',
-        type: 'POST',
-        data: datos,
-        success: function(Respuesta) {
-            //console.log(Respuesta);    
-            console.log(Respuesta);
-            alert('imprimiendo');
-        },
-        error: function(xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
-        }
-    });
+        $.ajax({
+            url: 'reporteZ.php',
+            type: 'POST',
+            data: datos,
+            success: function(Respuesta) {
+                //console.log(Respuesta);    
+                console.log(Respuesta);
+                alert('imprimiendo');
+            },
+            error: function(xhr) {
+                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            }
+        });
+    }
 }

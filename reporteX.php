@@ -48,7 +48,7 @@ if ($idventa != 0) {
 		inner join venta on venta.idventa = venta_producto.id_venta where venta.idventa = " . $idventa[$i]['id_venta'] . ";");
 	
 		for ($j=0; $j < count($productos[$i]); $j++) { 
-			$total += (double) $productos[$i][$j]['total'];
+			$total += (double) $productos[$i][$j]['cant_x_producto'] * $productos[$i][$j]['precio_producto'];
 		}
 	}
 }

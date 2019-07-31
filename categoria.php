@@ -43,7 +43,7 @@ if(($_POST["bandera"])=="eliminar"){
     <script src="js/Jquery.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <title>*</title>
+    <title>Categorias</title>
 </head>
 
 <body style="background: #34495E;">

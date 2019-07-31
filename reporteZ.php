@@ -103,6 +103,9 @@ $tickets = $connection->ejecutar("select ticket.numero_ticket, venta.total from 
 
 if (count($productos) > 0) {
 	imprimir($productos, $fecha, $MaxTicketN, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo, $tickets);
+	$connection = new BaseDatos();
+	$connection->ejecutar("insert into reporte(tipo_reporte, exento, gravado, nogravado, venta_neta, venta_bruta, fecha_reporte, fecha_fin_reporte, numero_ticket)
+							values(1, $total, $total, 0, $total, $total, $fecha, $fechaFin, $MaxTicketN)");
 }
 
 function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo, $tickets)

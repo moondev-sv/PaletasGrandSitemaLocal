@@ -47,7 +47,7 @@ if ($idventa != 0) {
 		inner join producto on producto.idproducto = venta_producto.id_producto
 		inner join venta on venta.idventa = venta_producto.id_venta where venta.idventa = " . $idventa[$i]['id_venta'] . ";");
 	
-		for ($j=0; $j < count($productos); $j++) { 
+		for ($j=0; $j < count($productos[$i]); $j++) { 
 			$total += (double) $productos[$i][$j]['total'];
 		}
 	}
@@ -68,7 +68,7 @@ if ($idventa != 0) {
 		inner join producto on producto.idproducto = venta_producto.id_producto
 		inner join venta on venta.idventa = venta_producto.id_venta where venta.idventa = " . $idventa[$i]['id_venta'] . ";");
 	
-		for ($j=0; $j < count($productosAnulados); $j++) { 
+		for ($j=0; $j < count($productosAnulados[$i]); $j++) { 
 			$totalAnulados += (double) $productosAnulados[$i][$j]['total'];
 		}
 	}

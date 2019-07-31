@@ -22,6 +22,13 @@ foreach ($datos as $key => $value) {
 }
 
 
+if(($_POST["bandera"])=="eliminar"){
+    $res = $BD->ejecutar("UPDATE categoria SET estado = 1 WHERE idcategoria = ".$_POST['id']);
+    //echo $res;
+    echo 1;
+    die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -102,18 +109,21 @@ foreach ($datos as $key => $value) {
     <div class="text-center">
         <div class="col-12 encabezado bg-light ">
             <?php
-			include("Menus/menuInventario.php")
+			include("Menus/menuCategorias.php")
 			?>
         </div>
     </div>
-    <button class='btn btn-success' style="margin: 15px;" onclick="showCat();">Agregar categoria</button>
+    
+    <br><br>
     <div class="container">
         <div class="bg-white">
-            <table class="table table-row table-bordered text-center">
-                <tr class="thead-dark">
-                    <th>Nombre</th>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
                     <th>Opcion</th>
-                </tr>
+                    </tr>
+                </thead>
                 <?= $html ?>
             </table>
         </div>

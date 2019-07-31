@@ -258,6 +258,7 @@ if(($_POST["bandera"])=="editar"){
 				</tbody>
 			</table>
 			
-		</div>
+		</div><center style="color: white;"><img src="Logo.svg" height="150" width="300"><h6>Cont&aacute;ctanos: <br><br> 7504-8995 &nbsp;&nbsp;&nbsp; 
+    7375-7233 &nbsp;&nbsp;&nbsp; 7482-2740<br> moondev.sv@gmail.com</h6></center>
 	</body>
 </html>

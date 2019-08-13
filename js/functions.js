@@ -213,6 +213,30 @@ function reportX() {
     }
 }
 
+function reportXPantalla() {
+
+    if(document.getElementById('fechaX').valueAsDate==null)
+        alert("Ingrese una fecha valida");
+    else
+    {
+        var datos = {
+            "fecha": document.getElementById('fechaX').value,
+            "imprimirPantalla":true
+        };
+        $.ajax({
+            url: 'reporteX.php',
+            type: 'POST',
+            data: datos,
+            success: function(Respuesta) {
+                document.getElementById('impresionPantallaDiv').innerHTML=Respuesta;
+            },
+            error: function(xhr) {
+                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            }
+        });
+    }
+}
+
 function reportZ() {
     if(document.getElementById('fechaZ').valueAsDate==null || document.getElementById('fechaFinZ').valueAsDate==null)
         alert("Ingrese un rango de fechas validas");

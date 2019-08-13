@@ -19,6 +19,29 @@
                 </div>
             </div>
         </div>
+        <!-- Modal para impresiones en pantalla -->
+        <div class="modal fade" id="impresionesPantallaModal" tabindex="-1" role="dialog"
+            aria-labelledby="modal para imprimir en pantalla" aria-hidden="true" style="overflow-y: scroll;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Impresion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container" id="impresionPantallaDiv">
+                           
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Modal para reportes de productos vendidos -->
         <div class="modal fade" id="reporteProductosVendidos" tabindex="-1" role="dialog"
             aria-labelledby="modal para reportes de ventas totales" aria-hidden="true">
@@ -393,6 +416,8 @@
                                         class="form-control">
                         <br>
                                     <button onclick="reportX();" class="btn btn-info">Imprimir</button>
+
+                                    <button onclick="reportXPantalla();" data-dismiss="modal" data-toggle="modal" data-target="#impresionesPantallaModal" class="btn btn-info">Imprimir pantalla solo para desarrollo</button>
                                 </div>
                             </div>
 
@@ -479,3 +504,4 @@
 
         </div>
     </div>
+</div>

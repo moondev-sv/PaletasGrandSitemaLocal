@@ -1,0 +1,83 @@
+estructura del arreglo $productos
+
+Array
+(
+    [0] => Array
+    (
+        [0] => Array
+        (
+            [nom_producto] => paleta clasica
+            [cant_x_producto] => 3
+            [precio_producto] => 1.5
+            [total] => 4.5
+            [idproducto] => 13
+        )
+
+        [1] => Array
+        (
+            [nom_producto] => paleta clasica
+            [cant_x_producto] => 3
+            [precio_producto] => 1.5
+            [total] => 4.5
+            [idproducto] => 13
+        )
+
+    )
+
+    [1] => Array
+        (
+            [0] => Array
+                (
+                    [nom_producto] => paleta clasica
+                    [cant_x_producto] => 12
+                    [precio_producto] => 1.5
+                    [total] => 18
+                )
+
+        )
+
+    [2] => Array
+        (
+            [0] => Array
+                (
+                    [nom_producto] => paleta clasica
+                    [cant_x_producto] => 2
+                    [precio_producto] => 1.5
+                    [total] => 3
+                )
+
+        )
+
+    [3] => Array
+        (
+            [0] => Array
+                (
+                    [nom_producto] => paleta clasica
+                    [cant_x_producto] => 12
+                    [precio_producto] => 1.5
+                    [total] => 18
+                )
+
+        )
+
+)
+
+estructura del arreglo $productosFormateados
+
+Array
+(
+    [13] => Array
+        (
+            [nom_producto] => paleta clasica
+            [cant_x_producto] => 31
+            [precio_producto] => 4.5
+        )
+
+    [14] => Array
+        (
+            [nom_producto] => paleta duo
+            [cant_x_producto] => 2
+            [precio_producto] => 4.5
+        )
+
+)

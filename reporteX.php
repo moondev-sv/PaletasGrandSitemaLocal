@@ -40,18 +40,47 @@ $connection = new BaseDatos();
 $idventa = $connection->ejecutar("select id_venta from ticket where fecha between '$fecha 00:00:00' AND '$fecha 23:59:59' AND estado = 1");
 
 if ($idventa != 0) {
+	$connection = new BaseDatos();
 	for ($i=0; $i < count($idventa); $i++) { 
-		$connection = new BaseDatos();
-		$productos[] = $connection->ejecutar("select producto.nom_producto, venta_producto.cant_x_producto, producto.precio_producto, venta.total
+		
+		$productos[] = $connection->ejecutar("SELECT producto.nom_producto, venta_producto.cant_x_producto, producto.precio_producto, venta.total, producto.idproducto
 		from venta_producto 
 		inner join producto on producto.idproducto = venta_producto.id_producto
 		inner join venta on venta.idventa = venta_producto.id_venta where venta.idventa = " . $idventa[$i]['id_venta'] . ";");
+
+
 	
 		for ($j=0; $j < count($productos[$i]); $j++) { 
 			$total += (double) $productos[$i][$j]['cant_x_producto'] * $productos[$i][$j]['precio_producto'];
 		}
 	}
+
+	//Esta variable guarda los productos ya de forma compacta para su facil impresion en un reporte
+	$productosFormateados;
+
+	//este for se encarga de ordenar los productos del mismo tipo en un solo espacio del array
+	for($i=0; $i<count($productos); $i++)
+	{
+		for($j=0; $j<count($productos[$i]); $j++)
+		{
+			if(@array_key_exists($productos[$i][$j][idproducto], $productosFormateados))
+			{
+				$productosFormateados[$productos[$i][$j][idproducto]][cant_x_producto]+=$productos[$i][$j][cant_x_producto];
+			}
+			else
+			{
+				$productosFormateados[$productos[$i][$j][idproducto]]= array(
+						"nom_producto" => $productos[$i][$j][nom_producto],
+						"cant_x_producto" => $productos[$i][$j][cant_x_producto],
+						"precio_producto" => $productos[$i][$j][precio_producto]
+					);
+			}
+		}
+	}
+
 }
+
+
 
 $connection = new BaseDatos();
 $idventa = $connection->ejecutar("select id_venta from ticket where fecha between '$fecha 00:00:00' AND '$fecha 23:59:59' AND estado = 0");
@@ -96,13 +125,107 @@ if ($idventa != 0) {
 }
 
 if (count($productos) > 0) {
-	imprimir($productos, $fecha, $MaxTicketN, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo);
-	$connection = new BaseDatos();
-	$connection->ejecutar("insert into reporte(tipo_reporte, exento, gravado, nogravado, venta_neta, venta_bruta, fecha_reporte, fecha_fin_reporte, numero_ticket)
-							values(1, $total, $total, 0, $total, $total, $fecha, $fechaFin, $MaxTicketN)");
+	if(isset($_POST['imprimirPantalla']))
+	{
+		imprimirPantalla($productosFormateados, $fecha, $MaxTicketN, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo);
+	}
+	else
+	{
+		imprimir($productosFormateados, $fecha, $MaxTicketN, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo);
+		$connection = new BaseDatos();
+		$connection->ejecutar("insert into reporte(tipo_reporte, exento, gravado, nogravado, venta_neta, venta_bruta, fecha_reporte, fecha_fin_reporte, numero_ticket)
+								values(1, $total, $total, 0, $total, $total, $fecha, $fechaFin, $MaxTicketN)");
+		}
+	
 }
 
-function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo)
+function imprimirPantalla($productosFormateados, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo)
+{
+	print("<br>"."|TICKET Nª: " . $numeroTicket . "<br><br><br>");
+	print("<br>"."|GRACIELA Y ANDREA S.A DE .CV" . "<br>");
+	print("|GRAND BE NATURAL" . "<br>");
+	print("|NRC: 252757-0" . "<br>");
+	print("|NIT: 0210-190716-101-1" . "<br>");
+	print("|Giro: Venta al por menor" . "<br>|<br>");
+	print("|Resolucion:15041-RES-CR-41514-2019" . "<br>");
+	print("|Autorizado: 24/07/2019" . "<br>");
+	print("|Del: 19AS00200002I1" . "<br>");
+	print("|Al: 19AS00200002I150000" . "<br>|<br>|<br>");
+	print("|GRAND BE NATURAL" . "<br>");
+	print("|local fc-4, pabellon int n°5" . "<br>");
+	print("|centro internacional de ferias y convenciones" . "<br>|<br>");
+	print("|san salvador, san salvador" . "<br>|<br>|<br>");
+
+	#La fecha también
+	print($fecha . "<br>");
+
+	/*Empezamos el reporte X*/
+	print("----------------------------------"."<br>");
+	print("Reporte X<br>");
+	print("X $fecha - ". date("h:i:s") . "<br>");
+	print("----------------------------------"."<br>");
+
+
+	print("Venta bruta    $  $total<br>");
+
+	print("Venta neta     $ $total<br>");
+
+	print("Efectivo Gav   $ $total<br>");
+
+	print("Credito        $ 0.00<br>");
+
+	print("Cheque         $ 0.00<br>");
+
+	print("Tarj/credito   $ $totaTarlCredito<br>");
+
+	print("Tarj/debito    $ 0.00<br>");
+
+	print("Crid(3)        $ 0.00<br>");
+
+	print("Crid(4)        $ 0.00<br>");
+
+	print("----------------------------------<br>");
+	
+	print("Anula ticket N° $cantAnulados<br>");
+	print("               $totalAnulados<br>");
+
+	print("----------------------------------<br>");
+
+	print("TOTAL          $total<br>");
+	print("TOTAL EXENTO   $total<br>");
+	print("TOTAL Gravado  $total<br>");
+
+	print("----------------------------------<br>");
+
+	print("X funciones libres<br>");
+
+	print("Efectivo N°    $ $total<br>");
+
+	print("----------------------------------<br>");
+
+	print("X productos<br>");
+
+	//print_r($productosFormateados);
+	
+	foreach ($productosFormateados as $auxProducto) {
+		print($auxProducto['nom_producto'] . "          " . $auxProducto['cant_x_producto'] . "<br>");
+		print("                                           $" . ($auxProducto['cant_x_producto'] * $auxProducto['precio_producto']) . "<br><br>");
+	}
+
+	print("----------------------------------<br>");
+
+	print("Total          $total<br>");
+
+	print("----------------------------------<br>");
+
+	print("Venta bruta    $ $total<br>");
+
+	print("Venta neta  N° $ $total<br>");
+
+	print("Efectivo Gav   $ $total<br>");
+}
+
+function imprimir($productosFormateados, $fecha, $numeroTicket, $total, $fechaFin, $cantAnulados, $totalAnulados, $totaTarlCredito, $totalEfectivo)
 {
 	$nombre_impresora = "LR2000"; 
 
@@ -202,14 +325,12 @@ function imprimir($productos, $fecha, $numeroTicket, $total, $fechaFin, $cantAnu
 	$printer->text("----------------------------------\n");
 
 	$printer->text("X productos\n");
-	
-	for ($i=0; $i < count($productos); $i++) { 
-		for ($j=0; $j < count($productos[$i]); $j++) {
-			$printer->text($productos[$i][$j]['nom_producto'] . "          " . $productos[$i][$j]['cant_x_producto'] . "\n");
-			$printer->text("                                           $" . ($productos[$i][$j]['cant_x_producto'] * $productos[$i][$j]['precio_producto']) . "\n\n");
-		}
-	}
 
+	foreach ($productosFormateados as $auxProducto) {
+		$printer->text($auxProducto['nom_producto'] . "          " . $auxProducto['cant_x_producto'] . "\n");
+			$printer->text("                                           $" . ($auxProducto['cant_x_producto'] * $auxProducto['precio_producto']) . "\n\n");
+	}
+	
 	$printer->text("----------------------------------\n");
 
 	$printer->text("Total          $total\n");

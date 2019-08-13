@@ -1,3 +1,5 @@
+var totalGlobal=0, vueltoGlobal=Number.parseFloat(0);
+
 function searchProduct() {
     var producto = document.getElementById("txtSearchProduct").value;
     var showResult = document.getElementById("searchResult");
@@ -36,6 +38,7 @@ function total(accion) {
             } else {
                 document.getElementById('subtotal').innerHTML = "Subtotal: $" + Respuesta;
                 document.getElementById('total').innerHTML = "Total: $" + Respuesta;
+                totalGlobal=Number.parseFloat(Respuesta);
             }
         },
         error: function (xhr) {
@@ -48,6 +51,11 @@ function pago(element) {
     if (element.value == 10) {
         total(1);
     }
+
+    if(element.value==10)
+        document.getElementById('pagar').classList.add("invisible");
+    else
+        document.getElementById('pagar').classList.remove("invisible");
 
     document.getElementById('fPago').value = element.value;
 }
@@ -64,8 +72,9 @@ function realizarCompra(fPago, monto, total) {
         },
         success: function (Respuesta) {
             //console.log(Respuesta); 
-            alert('imprimiento ');
+            alert('imprimiento');
             startSale();
+            alert("el vuelto es de "+vueltoGlobal.toFixed(2));
             document.getElementById('pagar').value = 0;
             document.getElementById("addResult").innerHTML = "";
             document.getElementById('subtotal').innerHTML = "Subtotal: $0";
@@ -193,6 +202,19 @@ function validarPago(e) {
         if (key < 48 || key > 57) {
             e.preventDefault();
         }
+    }
+}
+
+function calcularVuelto()
+{
+    var dineroIngresado = Number.parseFloat(document.getElementById('pagar').value);
+
+    if(dineroIngresado<totalGlobal || document.getElementById('pagar').value==0 || document.getElementById('pagar').value==null)
+        document.getElementById('vueltoAlert').innerHTML="La cantidad ingresada es menor a la requerida";
+    else
+    {
+        vueltoGlobal=dineroIngresado-totalGlobal;
+        document.getElementById('vueltoAlert').innerHTML="El vuelto es de $"+vueltoGlobal.toFixed(2);
     }
 }
 

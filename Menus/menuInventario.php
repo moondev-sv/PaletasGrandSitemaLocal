@@ -417,7 +417,7 @@
                         <br>
                                     <button onclick="reportX();" class="btn btn-info">Imprimir</button>
 
-                                    <button onclick="reportXPantalla();" data-dismiss="modal" data-toggle="modal" data-target="#impresionesPantallaModal" class="btn btn-info">Imprimir pantalla solo para desarrollo</button>
+                                    <button style="display: none;" onclick="reportXPantalla();" data-dismiss="modal" data-toggle="modal" data-target="#impresionesPantallaModal" class="btn btn-info">Imprimir pantalla solo para desarrollo</button>
                                 </div>
                             </div>
 
@@ -455,7 +455,7 @@
                                         <br>
                                     <button onclick="reportZ();" class="btn btn-info">Imprimir</button>
                                     
-                                    <button onclick="reportZPantalla();" data-dismiss="modal" data-toggle="modal" data-target="#impresionesPantallaModal" class="btn btn-info">Imprimir en pantalla solo para desarrolladores</button>
+                                    <button style="display: none;" onclick="reportZPantalla();" data-dismiss="modal" data-toggle="modal" data-target="#impresionesPantallaModal" class="btn btn-info">Imprimir en pantalla solo para desarrolladores</button>
                                 </div>
                             </div>
 

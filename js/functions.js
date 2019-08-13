@@ -33,7 +33,6 @@ function total(accion) {
         success: function (Respuesta) {
             //console.log(Respuesta); 
             if (accion == 1) {
-                document.getElementById('pagar').value = Respuesta;
                 totalPagar = Respuesta;
             } else {
                 document.getElementById('subtotal').innerHTML = "Subtotal: $" + Respuesta;
@@ -53,9 +52,15 @@ function pago(element) {
     }
 
     if(element.value==10)
+    {
         document.getElementById('pagar').classList.add("invisible");
+        document.getElementById('vueltoAlert').classList.add("invisible");
+    }
     else
+    {
         document.getElementById('pagar').classList.remove("invisible");
+        document.getElementById('vueltoAlert').classList.remove("invisible");
+    }
 
     document.getElementById('fPago').value = element.value;
 }
@@ -74,7 +79,7 @@ function realizarCompra(fPago, monto, total) {
             //console.log(Respuesta); 
             alert('imprimiento');
             startSale();
-            alert("el vuelto es de "+vueltoGlobal.toFixed(2));
+            alert("el vuelto es de $"+vueltoGlobal.toFixed(2));
             document.getElementById('pagar').value = 0;
             document.getElementById("addResult").innerHTML = "";
             document.getElementById('subtotal').innerHTML = "Subtotal: $0";

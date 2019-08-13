@@ -454,6 +454,8 @@
                                         class="form-control">
                                         <br>
                                     <button onclick="reportZ();" class="btn btn-info">Imprimir</button>
+                                    
+                                    <button onclick="reportZPantalla();" data-dismiss="modal" data-toggle="modal" data-target="#impresionesPantallaModal" class="btn btn-info">Imprimir en pantalla solo para desarrolladores</button>
                                 </div>
                             </div>
 

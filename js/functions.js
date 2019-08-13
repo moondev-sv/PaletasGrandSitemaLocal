@@ -79,30 +79,38 @@ function realizarCompra(fPago, monto, total) {
 }
 
 function finalizarPago() {
-    $.ajax({
-        url: 'busquedaProd.php',
-        type: 'POST',
-        data: {
-            "totalizar": 1
-        },
-        success: function (Respuesta) {
-            //console.log(Respuesta); 
-            var totalPagar = Respuesta;
 
-            var pago = document.getElementById('pagar').value;
-        
-            if (totalPagar > 0) {
-                if (pago.trim() === "" || pago < totalPagar) {
-                    alert('No es suficiente pagar el total de: $' + totalPagar);
-                } else {
-                    realizarCompra(document.getElementById('fPago').value, pago, totalPagar);
+    if(document.getElementById('pagar').value==0 || document.getElementById('pagar').value==null)
+        alert("Ingrese una cantidad mayor que 0");
+    else
+    {
+        $.ajax({
+            url: 'busquedaProd.php',
+            type: 'POST',
+            data: {
+                "totalizar": 1
+            },
+            success: function (Respuesta) {
+                
+                var totalPagar = Number.parseFloat(Respuesta);
+
+                var pago = Number.parseFloat(document.getElementById('pagar').value);
+            
+                if (totalPagar > 0) {
+                    if (pago < totalPagar) {
+                        alert("$"+pago+' no es suficiente pagar el total de: $' + totalPagar);
+                    } else {
+                        realizarCompra(document.getElementById('fPago').value, pago, totalPagar);
+                    }
                 }
+            },
+            error: function (xhr) {
+                alert("An error occured: " + xhr.status + " " + xhr.statusText);
             }
-        },
-        error: function (xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
-        }
-    });
+        });
+    }
+
+    
 }
 
 function puente(obj) {

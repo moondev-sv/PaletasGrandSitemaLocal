@@ -162,8 +162,7 @@
                         </label>
                     </div>
                     <input type="hidden" id="fPago" value="9">
-                    <center><input id="pagar" value='0' style="margin: 5px;" placeholder="Ingrese el pago recibido" type="text"
-                            class="form-control form-control" onkeypress="validarPago(event);"></center>
+                    <center><input id="pagar" style="margin: 5px;" placeholder="Ingrese el pago recibido" type="number" step="0.01" min=0.01 class="form-control form-control" onkeypress="validarPago(event); required"></center>
                 </div>
 
                 <!-- Modal footer -->
